@@ -1,0 +1,54 @@
+@import "../../styles.scss";
+.previousButton {
+  min-height: 64px;
+  min-width: 160px;
+  background-color: $secondary-light;
+  color: $secondary;
+  font-family: "Montserrat-Light";
+  font-weight: 600;
+}
+.nextButton {
+  min-height: 64px;
+  min-width: 160px;
+  background-color: $primary;
+  color: $secondary-light;
+  white-space: pre-wrap !important;
+  font-family: "Montserrat-Light";
+  font-weight: 600;
+}
+.buttonInQuestion {
+  min-height: 64px;
+  min-width: 160px;
+  white-space: pre-wrap !important;
+}
+.text {
+  color: $secondary;
+  font-family: "Montserrat-Regular";
+}
+.textFont {
+  font-family: "Montserrat-Light";
+}
+.nextButton:hover {
+  border-width: 1.5px;
+  background-color: $pure-white;
+  border-color: $primary;
+  color: $primary;
+}
+.previousButton:hover {
+  border-width: 1.5px;
+  background-color: $pure-white;
+  border-color: $secondary;
+  color: $secondary;
+}
+.ifTrue{
+  background-color: $primary-light;
+  color: $secondary-light;
+  font-weight: 600;
+  height: fit-content;
+}
+.ifFalse{
+  background-color: $secondary-light;
+  color: $secondary;
+  font-weight: 200;
+  height: fit-content;
+}

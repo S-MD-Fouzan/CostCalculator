@@ -1,0 +1,248 @@
+<div class="addFont">
+  <div *ngIf="final">
+    <div class="w-full h-full flex flex-col py-10">
+      <div class="flex flex-row">
+        <div
+          class="w-1/4"
+          *ngFor="let section of sectionsFromOneToFour; let i = index"
+        >
+          <div class="relative mb-2">
+            <div *ngIf="i == 0 ? false : true">
+              <div
+                class="
+                  absolute
+                  flex
+                  align-center
+                  items-center
+                  align-middle
+                  content-center
+                "
+                style=" width: calc(100% - 2.5rem - 1rem);
+                top: 50%;
+                transform: translate(-50%, -50%);"
+              >
+                <div
+                  class="
+                    w-full
+                    bg-gray-200
+                    rounded
+                    items-center
+                    align-middle align-center
+                    flex-1
+                  "
+                >
+                  <div
+                    class="w-0 py-1 rounded addColor"
+                    [style.width.%]="widthsArray[i]"
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="
+                w-10
+                h-10
+                mx-auto
+                bg-white
+                rounded-full
+                text-lg 
+                text-white
+                flex
+                items-center
+              "
+              [ngClass]="
+                i == 0
+                  ? 'contentTrue'
+                  : widthsArray[i] > 99 && sectionColoring[i]
+                  ? 'contentTrue'
+                  : 'contentFalse'
+              "
+            >
+              <span
+                class="text-center w-full"
+              >
+                <mat-icon class="py-2">{{ section.icon }}</mat-icon>
+              </span>
+            </div>
+          </div>
+          <div class="text-xs text-center md:text-base">
+            {{ section.stepLabel }}
+          </div>
+        </div>
+        <div class="w-1/4">
+          <div class="relative mb-2">
+            <div
+              class="
+                absolute
+                flex
+                align-center
+                items-center
+                align-middle
+                content-center
+              "
+              style=" width: calc(100% - 2.5rem - 1rem);
+              top: 50%;
+              transform: translate(-50%, -50%);"
+            >
+              <div
+                class="
+                  w-full
+                  bg-gray-200
+                  rounded
+                  items-center
+                  align-middle align-center
+                  flex-1
+                "
+              >
+                <div
+                  class="w-0 py-1 rounded addColor"
+                  [style.width.%]="widthsArray[length]"
+                ></div>
+              </div>
+            </div>
+            <div
+              class="
+                w-10
+                h-10
+                mx-auto
+                rounded-full
+                text-lg text-white
+                flex
+                items-center
+              "
+              [ngClass]="
+              widthsArray[length] > 99 && sectionColoring[length] == false ? 'isTrue' : 'isFalse'
+              "
+            >
+              <span
+                class="text-center w-full"
+              >
+                <mat-icon class="py-2">check_circle_outline</mat-icon>
+              </span>
+            </div>
+          </div>
+          <div class="text-xs text-center md:text-base">Finished</div>
+        </div>
+      </div>
+    </div>
+    <div class="py-10">
+      <mat-stepper
+        labelPosition="bottom"
+        (selectionChange)="OnStep($event)"
+        [selectedIndex]="selectedIndex"
+        #stepper
+      >
+        <mat-step *ngFor="let section of sectionsFromOneToFour; let i = index">
+          <div
+            *ngIf="!hide"
+            class="flex flex-col flex-wrap justify-center items-center"
+          >
+            <mat-card
+              class="
+                flex flex-col flex-wrap
+                sm:w-4/5
+                md:w-3/5
+                lg:w-2/5
+                cardColoring
+              "
+            >
+              <mat-card-title class="text-2xl titleText">{{
+                section.name
+              }}</mat-card-title>
+              <mat-card-content>
+                <p class="text-lg content">
+                  {{ section.content }}
+                </p>
+              </mat-card-content>
+              <mat-card-actions class="pl-2">
+                <div class="flex flex-row flex-wrap md:space-x-2 lg:space-x-2">
+                  <button
+                    (click)="ToHide()"
+                    class="text-lg py-2 px-4 rounded-lg nextButton"
+                  >
+                    Get Started
+                  </button>
+                  <button
+                    (click)="switchIt(stepper)"
+                    class="text-lg py-2 px-4 rounded-lg SkipButton"
+                  >
+                    Skip {{ section.stepLabel }}
+                  </button>
+                </div>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+          <div *ngIf="hide" class="flex flex-col space-y-5">
+            <app-questionnaire
+              [indexOfSectionFromParent]="i + 1"
+              (atSummary)="buttonToggler($event)"
+              (adjustWidth)="adjustingWidth($event, i + 1)"
+            ></app-questionnaire>
+          </div>
+          <div
+            class="
+              flex flex-row flex-wrap
+              justify-end
+              w-11/12
+              mt-5
+              sm:mr-5
+              md:mr-5
+              lg:mr-10
+            "
+          >
+            <button
+              *ngIf="!nextDisabled"
+              (click)="switchIt(stepper)"
+              class="text-lg py-2 px-4 rounded-lg nextButton"
+            >
+              Next
+            </button>
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </div>
+  </div>
+  <div *ngIf="!final" class="mt-10 summary space-y-5 sm:pl-5 sm:pr-5">
+    <h1 class="text-4xl text-black text-center text">
+      Here's the estimate of your project
+    </h1>
+    <h1 class="text-3xl text-black text-center text">
+      ${{ minPrice }} - ${{ maxPrice }}
+    </h1>
+
+    <mat-accordion class="w-11/12">
+      <mat-expansion-panel
+        *ngFor="let section of FilledSectionsArray; let i = index"
+        [expanded]="step === i"
+        (opened)="setStep(i)"
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title
+            class="text-2xl text"
+            [style.color]="step == i ? '#15a811' : '#000000'"
+          >
+            {{ section.name }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-summary [indexOfSection]="indices[i]"></app-summary>
+        <mat-action-row>
+          <div class="flex flex-row flex-wrap gap-2 justify-end mr-5">
+            <button
+              (click)="prevStep()"
+              class="text-lg py-2 px-4 rounded-lg previousButton"
+            >
+              Previous
+            </button>
+            <button
+              (click)="nextStep()"
+              class="text-lg py-2 px-4 rounded-lg nextButton"
+            >
+              Next
+            </button>
+          </div>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

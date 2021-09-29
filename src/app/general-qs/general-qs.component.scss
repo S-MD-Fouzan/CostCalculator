@@ -1,0 +1,31 @@
+@import "../../styles.scss";
+.addColor {
+  background-color: $primary;
+}
+.adjustment{
+  width: calc(100% - 2.5rem - 1rem);
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.changedWidth{
+  background-color: $primary;
+  color: $secondary-light;
+}
+.unChangedWidth{
+  background-color: $secondary-light;
+  color: $secondary;
+}
+.nextButton {
+  min-height: 64px;
+  min-width: 160px;
+  background-color: $primary;
+  color: $secondary-light;
+  font-family: "Montserrat-Light";
+  font-weight: 600;
+}
+.nextButton:hover {
+  border-width: 1.5px;
+  background-color: $pure-white;
+  border-color: $primary;
+  color: $primary;
+}
