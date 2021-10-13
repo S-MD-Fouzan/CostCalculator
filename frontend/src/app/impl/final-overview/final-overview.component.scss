@@ -1,0 +1,65 @@
+@import "../../../styles.scss";
+  ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: $primary;
+  }
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color:$pure-black;
+  }
+  ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: $primary;
+  }
+  ::ng-deep .mat-form-field-label {
+    color: $pure-black;
+  }
+  ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: $primary;
+  }
+  ::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+    color: red!important;
+  }
+  .summary {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .text {
+    font-family: "Montserrat-Regular";
+  }
+  .previousButton {
+    min-height: 64px;
+    min-width: 160px;
+    background-color: $secondary-light;
+    color: $secondary;
+    font-family: "Montserrat-Light";
+    font-weight: 600;
+  }
+  .previousButton:hover {
+    border-width: 1.5px;
+    background-color: $pure-white;
+    border-color: $secondary;
+    color: $secondary;
+  }
+  .nextButton:hover {
+    border-width: 1.5px;
+    background-color: $pure-white;
+    border-color: $primary;
+    color: $primary;
+  }
+  .nextButton {
+    min-height: 64px;
+    min-width: 160px;
+    background-color: $primary;
+    color: $secondary-light;
+    font-family: "Montserrat-Light";
+    white-space: pre-wrap !important;
+    font-weight: 600;
+  }
+  .spinner{
+    position: absolute;
+    background:white;
+    opacity: 0.8;
+    z-index: 99;
+    top: 0px;
+    bottom:0px;
+  }

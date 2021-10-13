@@ -1,0 +1,115 @@
+@import "../../../styles.scss";
+:host ::ng-deep .mat-horizontal-stepper-header-container {
+  display: none;
+}
+.addColor {
+  background-color: $primary;
+}
+.text {
+  font-family: "Montserrat-Regular";
+}
+.skipButton {
+  min-height: 64px;
+  min-width: 160px;
+  font-family: "Montserrat-Light";
+  white-space: pre-wrap !important;
+  font-family: "Montserrat-Regular";
+}
+.previousButton {
+  min-height: 64px;
+  min-width: 160px;
+  background-color: $secondary-light;
+  color: $secondary;
+  font-family: "Montserrat-Light";
+  font-weight: 600;
+}
+.previousButton:hover {
+  border-width: 1.5px;
+  background-color: $pure-white;
+  border-color: $secondary;
+  color: $secondary;
+}
+.nextButton:hover {
+  border-width: 1.5px;
+  background-color: $pure-white;
+  border-color: $primary;
+  color: $primary;
+}
+.nextButton {
+  min-height: 64px;
+  min-width: 160px;
+  background-color: $primary;
+  color: $secondary-light;
+  font-family: "Montserrat-Light";
+  white-space: pre-wrap !important;
+  font-weight: 600;
+}
+.addFont {
+  font-family: "Montserrat-Light";
+}
+.titleText {
+  color: $pure-black;
+  font-family: "Montserrat-Regular";
+}
+.content {
+  color: $pure-black;
+  font-family: "Montserrat-Light";
+}
+.cardColoring {
+  background-color: $secondary-light;
+}
+.isTrue{
+  background-color: $primary;
+  color: $secondary-light;
+}
+.isFalse{
+  background-color: $secondary-light;
+  color: $secondary;
+}
+.contentTrue{
+  background-color: $primary;
+  color: $secondary-light;
+}
+.contentFalse{
+  background-color: $secondary-light;
+  color: $secondary;
+}
+@media screen
+  and (min-width: 1024px){
+    .progressBarDisable{
+      display: none;
+    }
+    .widthChange{
+      width: 15%;
+    }
+}
+ 
+@media screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px){
+    .progressBarDisable{
+      display: none;
+    }
+    .widthChange{
+      width: 15%;
+    }
+}
+@media screen
+  and (min-device-width: 540px)
+  and (max-device-width: 720px){
+    .classChange{
+      display: none;
+    }
+    .widthChange{
+      width: 50%;
+    }
+}
+@media screen
+  and (max-device-width: 480px){
+    .classChange{
+      display: none;
+    }
+    .widthChange{
+      width: 50%;
+    }
+}

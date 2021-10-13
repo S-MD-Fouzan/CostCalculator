@@ -1,0 +1,32 @@
+@import "../../../styles.scss";
+.fullPage {
+  background-color: $pure-white;
+  min-height: 100vh;
+}
+.banner {
+  color: $secondary;
+  font-weight: 600;
+}
+.heading {
+  color: $pure-black;
+  font-weight: 600;
+}
+.getStarted {
+  background-color: $primary;
+  color: $secondary-light;
+  border-width: 1.5px;
+}
+.getStarted:hover {
+  border-width: 1.5px;
+  background-color: $pure-white;
+  border-color: $primary;
+  color: $primary;
+}
+#btnHome {
+  font-size: 30px;
+  background-color: $primary;
+  color: $secondary-light;
+}
+.mainHeading {
+  font-size: 50px;
+}
