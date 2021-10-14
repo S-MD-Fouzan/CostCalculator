@@ -1,4 +1,3 @@
-
 export interface Question {
     q_text: string;
     options: Option[];
@@ -9,4 +8,3 @@ export interface Option {
     min_price: number;
     max_price: number;
 }
-

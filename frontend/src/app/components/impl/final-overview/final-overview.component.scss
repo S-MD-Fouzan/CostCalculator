@@ -1,4 +1,4 @@
-@import "../../../styles.scss";
+@import "../../../../styles.scss";
   ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
     stroke: $primary;
   }
@@ -25,35 +25,6 @@
   }
   .text {
     font-family: "Montserrat-Regular";
-  }
-  .previousButton {
-    min-height: 64px;
-    min-width: 160px;
-    background-color: $secondary-light;
-    color: $secondary;
-    font-family: "Montserrat-Light";
-    font-weight: 600;
-  }
-  .previousButton:hover {
-    border-width: 1.5px;
-    background-color: $pure-white;
-    border-color: $secondary;
-    color: $secondary;
-  }
-  .nextButton:hover {
-    border-width: 1.5px;
-    background-color: $pure-white;
-    border-color: $primary;
-    color: $primary;
-  }
-  .nextButton {
-    min-height: 64px;
-    min-width: 160px;
-    background-color: $primary;
-    color: $secondary-light;
-    font-family: "Montserrat-Light";
-    white-space: pre-wrap !important;
-    font-weight: 600;
   }
   .spinner{
     position: absolute;

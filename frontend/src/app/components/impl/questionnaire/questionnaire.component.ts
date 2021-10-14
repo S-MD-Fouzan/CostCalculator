@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Section } from '../../models/section.model';
-import { SectionService } from '../../services/section.service';
+import { Section } from '../../../models/section.model';
+import { SectionService } from '../../../services/section.service';
 
 @Component({
   selector: 'app-questionnaire',

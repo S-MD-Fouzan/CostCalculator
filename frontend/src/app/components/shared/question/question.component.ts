@@ -6,13 +6,12 @@ import {
   EventEmitter,
   SimpleChanges,
 } from '@angular/core';
-import { Question } from '../../models/question.model';
-import { Option } from '../../models/question.model';
+import { Question } from '../../../models/question.model';
+import { Option } from '../../../models/question.model';
 import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SectionService } from '../../services/section.service';
+import { SectionService } from '../../../services/section.service';
 import { MatChip } from '@angular/material/chips';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-question',
@@ -57,13 +56,6 @@ export class QuestionComponent implements OnInit {
       } else {
         this.questionToAppendAnswers.options = this.answersFormControl.value;
         this.sectionService.setAnswers(this.indexOfSection,this.indexOfQuestion,this.answersFormControl.value);
-        // Swal.fire({
-        // position: 'top-end',
-        // icon: 'success',
-        // title: 'Your response has been saved',
-        // showConfirmButton: false,
-        // timer: 1000,
-        // });
         this.answersFormControl.reset();
         this.previous = true;
         this.inNext.emit(this.indexOfQuestion);
@@ -77,13 +69,6 @@ export class QuestionComponent implements OnInit {
           panelClass: ['customSnackBar'],
         });
       } else {
-        // Swal.fire({
-        // position: 'top-end',
-        // icon: 'success',
-        // title: 'Your response has been saved',
-        // showConfirmButton: false,
-        // timer: 1000,
-        // });
         this.previous = true;
         this.inNext.emit(this.indexOfQuestion);
       }

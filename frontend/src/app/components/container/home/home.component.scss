@@ -1,4 +1,4 @@
-@import "../../../styles.scss";
+@import "../../../../styles.scss";
 .fullPage {
   background-color: $pure-white;
   min-height: 100vh;
@@ -17,9 +17,8 @@
   border-width: 1.5px;
 }
 .getStarted:hover {
-  border-width: 1.5px;
   background-color: $pure-white;
-  border-color: $primary;
+  border: 1.5px solid $primary;
   color: $primary;
 }
 #btnHome {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { SectionService } from '../../services/section.service';
-import { Section } from '../../models/section.model';
+import { SectionService } from '../../../services/section.service';
+import { Section } from '../../../models/section.model';
 
 @Component({
   selector: 'app-final-overview',
@@ -20,9 +20,8 @@ export class FinalOverviewComponent implements OnInit {
     Validators.email,
   ]);
   costDisplayer: boolean;
+  step:number = 0;
   constructor(private sectionService:SectionService) { }
-
-  step = 0;
 
   setStep(index: number) {
     this.step = index;

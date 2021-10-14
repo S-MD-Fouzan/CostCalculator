@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { SectionService } from '../../services/section.service';
-import { Section } from '../../models/section.model';
+import { SectionService } from '../../../services/section.service';
+import { Section } from '../../../models/section.model';
 import { MatStepper } from '@angular/material/stepper';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertBoxComponent } from '../../shared/alert-box/alert-box.component';

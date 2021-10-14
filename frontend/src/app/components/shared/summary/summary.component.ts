@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Section } from '../../models/section.model';
-import { Question } from '../../models/question.model';
-import { SectionService } from '../../services/section.service';
+import { Section } from '../../../models/section.model';
+import { Question } from '../../../models/question.model';
+import { SectionService } from '../../../services/section.service';
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
