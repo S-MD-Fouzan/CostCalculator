@@ -2,6 +2,10 @@
 :host ::ng-deep .mat-horizontal-stepper-header-container {
   display: none;
 }
+::ng-deep .mat-tooltip{
+  background-color: $primary;
+  font-size: 12px;
+} 
 .addColor {
   background-color: $primary;
 }
@@ -44,7 +48,10 @@
       display: none;
     }
     .widthChange{
-      width: 16%;
+      width: 15%;
+    }
+    .classChange{
+      width: 7%;
     }
 }
  
@@ -55,7 +62,10 @@
       display: none;
     }
     .widthChange{
-      width: 20%;
+      width: 15%;
+    }
+    .classChange{
+      width: 7%;
     }
 }
 @media screen
