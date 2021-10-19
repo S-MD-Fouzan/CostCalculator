@@ -1,0 +1,15 @@
+@import "../../../../styles.scss";
+.text {
+  color: $secondary;
+}
+.overviewCard {
+  border: 2px solid $primary;
+  color: $secondary;
+  font-family: "Montserrat-Light";
+}
+.answer {
+  background-color: $primary-light;
+  color: $secondary-light;
+  font-weight: 600;
+  font-family: "Montserrat-Light";
+}

@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_shared_options",
+  "info": {
+    "name": "options",
+    "icon": "ad"
+  },
+  "options": {
+    "timestamps": false,
+    "privateAttributes":["_id","id","published_at","__v"],
+    "populateCreatorFields":true
+  },
+  "attributes": {
+    "text": {
+      "type": "string"
+    },
+    "min_price": {
+      "type": "integer"
+    },
+    "max_price": {
+      "type": "integer"
+    }
+  }
+}

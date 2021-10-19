@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "submissions",
+  "info": {
+    "name": "submission"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": false,
+    "privateAttributes": [
+      "_id",
+      "published_at",
+      "__v",
+      "id"
+    ],
+    "populateCreatorFields": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "email": {
+      "type": "string"
+    },
+    "lowerEstimate": {
+      "type": "integer"
+    },
+    "upperEstimate": {
+      "type": "integer"
+    },
+    "questions": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.questions"
+    }
+  }
+}

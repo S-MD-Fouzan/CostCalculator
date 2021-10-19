@@ -1,0 +1,44 @@
+<div class="fullPage">
+  <div class="banner flex justify-center m-3">
+    <diV class="text-center">
+      <h1 class="heading Montserrat-Regular text-4xl pt-10 md:pt-14 lg:pt-16">
+        Want to know the cost of your product?
+      </h1>
+      <p class="pt-10 text-2xl">
+        Want to know how much implementing a quality digital application would
+        cost?
+      </p>
+      <p class="text-2xl">
+        This application would help you calculate the total cost of implementing
+        the solution.
+      </p>
+      <p class="text-2xl">Well, you are at the right place.</p>
+      <div class="flex flex-row justify-center mt-3">
+        <button
+          class="getStarted font-bold py-2 px-4 rounded-lg mt-5 text-lg"
+          routerLink="/all-sections"
+        >
+          Get started
+        </button>
+      </div>
+    </diV>
+  </div>
+  <div class="flex flex-col m-3 mt-10" *ngFor="let section of sections">
+    <div class="flex flex-row justify-center m-5">
+      <div>
+        <i
+          class="material-icons h-auto w-auto px-10 py-5 rounded-lg btnHome"
+          >{{ section.icon }}</i
+        >
+      </div>
+      <div class="pl-8 flex-initial">
+        <h1 class="heading Montserrat-Regular text-2xl">
+          <b>{{ section.stepLabel }}</b>
+        </h1>
+        <p class="banner pt-5 max-w-2xl text-xl">
+          {{ section.content }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

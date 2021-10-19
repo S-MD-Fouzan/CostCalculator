@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sections",
+  "info": {
+    "name": "section"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": false,
+    "privateAttributes": [
+      "_id",
+      "published_at",
+      "__v"
+    ],
+    "populateCreatorFields": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "stepLabel": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string"
+    },
+    "questions": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.questions"
+    }
+  }
+}
