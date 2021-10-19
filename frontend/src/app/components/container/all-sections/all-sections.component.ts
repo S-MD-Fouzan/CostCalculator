@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { SectionService } from '../../../services/section.service';
 import { Section } from '../../../models/section.model';
 import { MatStepper } from '@angular/material/stepper';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertBoxComponent } from '../../shared/alert-box/alert-box.component';
+import { MatTooltipDefaultOptions, MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-all-sections',
@@ -15,7 +16,13 @@ import { AlertBoxComponent } from '../../shared/alert-box/alert-box.component';
       provide: STEPPER_GLOBAL_OPTIONS,
       useValue: { displayDefaultIndicatorType: false },
     },
-  ],
+    {
+      provide: MAT_TOOLTIP_DEFAULT_OPTIONS,
+      useValue: {
+        position : 'above'  
+      }
+    }
+  ]
 })
 export class AllSectionsComponent implements OnInit {
   length: number;

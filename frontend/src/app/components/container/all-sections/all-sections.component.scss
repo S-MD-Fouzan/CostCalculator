@@ -2,10 +2,7 @@
 :host ::ng-deep .mat-horizontal-stepper-header-container {
   display: none;
 }
-::ng-deep .mat-tooltip{
-  background-color: $primary;
-  font-size: 12px;
-} 
+
 .addColor {
   background-color: $primary;
 }
@@ -26,64 +23,40 @@
 .cardColoring {
   background-color: $secondary-light;
 }
-.isTrue{
+.isTrue {
   background-color: $primary;
   color: $secondary-light;
 }
-.isFalse{
+.isFalse {
   background-color: $secondary-light;
   color: $secondary;
 }
-.contentTrue{
+.contentTrue {
   background-color: $primary;
   color: $secondary-light;
 }
-.contentFalse{
+.contentFalse {
   background-color: $secondary-light;
   color: $secondary;
 }
-@media screen
-  and (min-width: 1024px){
-    .progressBarDisable{
-      display: none;
-    }
-    .widthChange{
-      width: 15%;
-    }
-    .classChange{
-      width: 7%;
-    }
+@media screen and (min-width: 1024px) {
+  .progressBarDisable {
+    display: none;
+  }
 }
- 
-@media screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px){
-    .progressBarDisable{
-      display: none;
-    }
-    .widthChange{
-      width: 15%;
-    }
-    .classChange{
-      width: 7%;
-    }
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .progressBarDisable {
+    display: none;
+  }
 }
-@media screen
-  and (min-device-width: 540px)
-  and (max-device-width: 720px){
-    .classChange{
-      display: none;
-    }
-    .widthChange{
-      width: 50%;
-    }
+@media screen and (min-device-width: 540px) and (max-device-width: 720px) {
+  .classChange {
+    display: none;
+  }
 }
-@media screen
-  and (max-device-width: 480px){
-    .classChange{
-      display: none;
-    }
-    .widthChange{
-      width: 50%;
-    }
+@media screen and (max-device-width: 480px) {
+  .classChange {
+    display: none;
+  }
 }

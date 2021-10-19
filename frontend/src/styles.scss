@@ -25,6 +25,9 @@ body {
   margin: 0;
   font-family: "Montserrat-Light", sans-serif;
 }
+.toolTipStyle{
+  background-color: $primary !important;
+}
 .customSnackBar {
   background-color: $secondary-light;
   color: red;
@@ -49,15 +52,13 @@ body {
   font-weight: 600;
 }
 .previousButton:hover {
-  border-width: 1.5px;
+  border: 1.5px solid $secondary;
   background-color: $pure-white;
-  border-color: $secondary;
   color: $secondary;
 }
 .nextButton:hover {
-  border-width: 1.5px;
+  border: 1.5px solid $primary;
   background-color: $pure-white;
-  border-color: $primary;
   color: $primary;
 }
 .nextButton {

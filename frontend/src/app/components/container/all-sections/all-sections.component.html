@@ -1,153 +1,117 @@
 <div class="addFont">
-  <div *ngIf="final">
-    <div class="w-full h-full flex flex-col py-10">
-      <div class="flex flex-row justify-center">
-        <div
-          *ngFor="let section of sections; let i = index"
-          [ngClass]="{
-            classChange: selectedIndex !== i && selectedIndex + 1 !== i,
-            widthChange: selectedIndex === i || selectedIndex + 1 === i
-          }"
-        >
-          <div class="relative mb-2">
-            <div *ngIf="i == 0 ? false : true">
-              <div
-                class="
-                  absolute
-                  flex
-                  align-center
-                  items-center
-                  align-middle
-                  content-center
-                "
-                [ngClass]="{
-                  classChange: selectedIndex === i,
-                  progressBarDisable: selectedIndex !== i - 1
-                }"
-                style="
-                  width: calc(100% - 2rem - 1rem);
-                  top: 50%;
-                  transform: translate(-50%,-50%);
-                "
-              >
-                <div
-                  class="
-                    w-full
-                    bg-gray-200
-                    rounded
-                    items-center
-                    align-middle align-center
-                    flex-1
-                  "
-                >
-                  <div
-                    class="w-0 py-1 rounded addColor"
-                    [style.width.%]="widthsArray[i - 1]"
-                  ></div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="
-                w-10
-                h-10
-                mx-auto
-                bg-white
-                rounded-full
-                text-lg text-white
-                flex
-                items-center
-              "
-              [ngClass]="
-                widthsArray[i] > 99 && sectionColoring[i] == true
-                  ? 'contentTrue'
-                  : i == selectedIndex
-                  ? 'contentTrue'
-                  : 'contentFalse'
-              "
-              #tooltip="matTooltip"
-              [matTooltip]="selectedIndex !== i && selectedIndex + 1 !== i?section.stepLabel:''"
-              [matTooltipPosition]="'below'"
-              (click)="sectionChange(i)"
-            >
-              <span class="text-center w-full cursor-pointer">
-                <mat-icon class="py-2">{{ section.icon }}</mat-icon>
-              </span>
-            </div>
+  <div
+    *ngIf="final"
+    class="w-full h-full flex flex-col justify-center items-center py-10"
+  >
+    <div class="flex flex-row justify-center my-4 pb-4">
+      <div
+        class="flex flex-row pb-3 gap-3"
+        *ngFor="let section of sections; let i = index"
+        [ngClass]="{
+          classChange: selectedIndex !== i && selectedIndex + 1 !== i,
+          widthChange: selectedIndex === i || selectedIndex + 1 === i
+        }"
+      >
+        <div class="flex flex-col w-10 items-center ml-3">
+          <div
+            [ngClass]="
+              widthsArray[i] > 99 && sectionColoring[i] == true
+                ? 'contentTrue'
+                : i == selectedIndex
+                ? 'contentTrue'
+                : 'contentFalse'
+            "
+            class="w-10 h-10 rounded-full text-lg flex items-center"
+            #tooltip="matTooltip"
+            [matTooltip]="
+              selectedIndex !== i && selectedIndex + 1 !== i
+                ? section.stepLabel
+                : ''
+            "
+            matTooltipClass="toolTipStyle"
+            (click)="sectionChange(i)"
+          >
+            <span class="text-center w-full cursor-pointer">
+              <mat-icon class="py-2">{{ section.icon }}</mat-icon>
+            </span>
           </div>
-          <div class="text-xs text-center md:text-base" [ngClass]="{
-            progressBarDisable: selectedIndex !== i && selectedIndex + 1 !== i
-          }">
+          <div
+            class="flex-1 py-2"
+            [ngClass]="{
+              progressBarDisable: selectedIndex !== i && selectedIndex + 1 !== i
+            }"
+          >
             {{ section.stepLabel }}
           </div>
         </div>
-        <div
-          [ngClass]="{
-            classChange: selectedIndex !== length - 2,
-            widthChange: selectedIndex === length - 2
-          }"
-        >
-          <div class="relative mb-2">
+        <div class="flex flex-col">
+          <div
+            class="
+              w-36
+              align-center
+              items-center
+              align-middle
+              content-center
+              flex
+              pt-4
+            "
+            [ngClass]="{
+              classChange: selectedIndex === i - 1,
+              progressBarDisable: selectedIndex !== i
+            }"
+          >
             <div
               class="
-                absolute
-                flex
-                align-center
+                w-full
+                bg-gray-200
+                rounded
                 items-center
-                align-middle
-                content-center
-              "
-              [ngClass]="{
-                progressBarDisable: selectedIndex !== length - 2
-              }"
-              style="
-                width: calc(100% - 2rem - 1rem);
-                top: 50%;
-                transform: translate(-50%, -50%);
+                align-middle align-center
+                flex-1
               "
             >
               <div
                 class="
-                  w-full
-                  bg-gray-200
+                  text-xs
+                  leading-none
+                  py-1
+                  text-center text-gray-200
+                  w-0
                   rounded
-                  items-center
-                  align-middle align-center
-                  flex-1
+                  addColor
                 "
-              >
-                <div
-                  class="w-0 py-1 rounded addColor"
-                  [style.width.%]="widthsArray[length - 2]"
-                ></div>
-              </div>
-            </div>
-            <div
-              class="
-                w-10
-                h-10
-                mx-auto
-                rounded-full
-                text-lg text-white
-                flex
-                items-center
-              "
-              [ngClass]="
-                widthsArray[length - 2] > 99 &&
-                sectionColoring[length - 2] == false
-                  ? 'isTrue'
-                  : 'isFalse'
-              "
-            >
-              <span class="text-center w-full cursor-pointer">
-                <mat-icon class="py-2">check_circle_outline</mat-icon>
-              </span>
+                [style.width.%]="widthsArray[i]"
+              ></div>
             </div>
           </div>
-          <div class="text-xs text-center md:text-base" [ngClass]="{
-            progressBarDisable: selectedIndex !== length-2
-          }">Finished</div>
         </div>
+      </div>
+      <div class="flex flex-col w-10 items-center ml-3"  [ngClass]="{
+        classChange: selectedIndex !== length - 2,
+        widthChange: selectedIndex === length - 2
+      }">
+        <div
+          class="
+            w-10
+            h-10
+            rounded-full
+            text-lg text-white
+            flex
+            items-center
+          "
+          [ngClass]="
+              widthsArray[length-2] > 99
+                ? 'contentTrue'
+                : 'contentFalse'
+            "
+        >
+          <span class="text-center w-full" 
+            ><mat-icon class="py-2">check_circle_outline</mat-icon></span
+          >
+        </div>
+        <div class="flex-1 py-2" [ngClass]="{
+          progressBarDisable: selectedIndex !== length-1 && selectedIndex + 1 !== length-1
+        }">Finished</div>
       </div>
     </div>
     <div class="py-10">
