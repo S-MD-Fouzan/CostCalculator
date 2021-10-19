@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { SectionService } from '../../../services/section.service';
 import { Section } from '../../../models/section.model';
+import { Question } from 'src/app/models/question.model';
+import { Submission } from '../../../models/submission.model';
 
 @Component({
   selector: 'app-final-overview',
@@ -12,7 +14,7 @@ export class FinalOverviewComponent implements OnInit {
   minPrice: number;
   maxPrice: number;
   sectionsWithoutGeneralQuestions : Section[];
-  FilledSectionsArray: Section[] = [];
+  filledSectionsArray: Section[] = [];
   indices: number[];
   costSpinner:boolean;
   emailFormControl = new FormControl('', [
@@ -23,20 +25,37 @@ export class FinalOverviewComponent implements OnInit {
   step:number = 0;
   constructor(private sectionService:SectionService) { }
 
-  setStep(index: number) {
+  ngOnInit(): void {
+    this.costDisplayer = true;
+    this.filledSectionsArray=this.sectionService.getFilledSections();
+    this.indices=this.sectionService.getIndices();
+  }
+
+  setStep(index: number):void {
     this.step = index;
   }
-  nextStep() {
+
+  nextStep():void {
     this.step++;
   }
 
-  prevStep() {
+  prevStep():void {
     this.step--;
   }
-  onSubmit() {
+  
+  onSubmit():void {
     if(this.emailFormControl.valid){
       this.costSpinner=true;
-      this.sectionService.getPrices(this.emailFormControl.value, this.FilledSectionsArray).then((submission: any) => {
+      let finalData:Submission=<Submission>{};
+      finalData.email=this.emailFormControl.value;
+      finalData.lowerEstimate=0;
+      finalData.upperEstimate=0;
+      let arrayOfQuestionsWithAnswers: Question[] = [];
+      for (let i = 0; i < this.filledSectionsArray.length; i++) {
+        arrayOfQuestionsWithAnswers= [...this.filledSectionsArray[i].questions, ...arrayOfQuestionsWithAnswers];
+      }
+      finalData.questions = arrayOfQuestionsWithAnswers;
+      this.sectionService.getPrices(finalData).then((submission: Submission) => {
         this.minPrice = submission.lowerEstimate;
         this.maxPrice = submission.upperEstimate;
         this.costDisplayer = false;
@@ -45,11 +64,6 @@ export class FinalOverviewComponent implements OnInit {
         console.log(err);
       })
     }
-  }
-  ngOnInit(): void {
-    this.costDisplayer = true;
-    this.FilledSectionsArray=this.sectionService.getFilledSections();
-    this.indices=this.sectionService.getIndices();
   }
 
 }

@@ -22,6 +22,22 @@ export class QuestionnaireComponent implements OnInit {
   public adjustWidth = new EventEmitter<number>();
 
   constructor(private sectionService: SectionService) {}
+
+  ngOnInit(): void {
+    this.currentSection = this.sectionService.getSection(
+      this.indexOfSectionFromParent
+    );
+    this.index = 0;
+    this.summary = false;
+    var QLength = this.sectionService.getQuestionsLength(
+      this.indexOfSectionFromParent
+    );
+    this.WidthIncrement = 100 / QLength;
+    this.widthsArray = new Array(this.sectionService.getSectionsLength()).fill(
+      0
+    );
+  }
+  
   nextIsClicked($event: number): void {
     this.widthsArray[this.indexOfSectionFromParent] =(this.index+1)*this.WidthIncrement;
     this.adjustWidth.emit(this.widthsArray[this.indexOfSectionFromParent]);
@@ -40,18 +56,4 @@ export class QuestionnaireComponent implements OnInit {
     this.index = $event - 1;
   }
 
-  ngOnInit(): void {
-    this.currentSection = this.sectionService.getSection(
-      this.indexOfSectionFromParent
-    );
-    this.index = 0;
-    this.summary = false;
-    var QLength = this.sectionService.getQuestionsLength(
-      this.indexOfSectionFromParent
-    );
-    this.WidthIncrement = 100 / QLength;
-    this.widthsArray = new Array(this.sectionService.getSectionsLength()).fill(
-      0
-    );
-  }
 }

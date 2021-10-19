@@ -3,6 +3,7 @@ import { Section } from '../models/section.model';
 import { HttpClient } from '@angular/common/http';
 import {Option, Question} from '../models/question.model';
 import {environment} from '../../environments/environment';
+import { Submission } from '../models/submission.model';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +29,7 @@ export class SectionService {
       );
     })
   }
-  sendData(prods:Section[]){
+  sendData(prods:Section[]):void{
     this.widthsArray = new Array(this.sections.length+1).fill(0);
     this.sectionColoring = new Array(this.sections.length+1).fill(false);
     this.sectionColoring[0] = true;
@@ -57,23 +58,12 @@ export class SectionService {
   getSection(id: number): Section {
     return this.sections[id];
   }
-  getQuestionsForSavingAnswers(id: number) {
+  getQuestionsForSavingAnswers(id: number):Question[]{
     return this.sectionsWithoutOptions[id].questions;
   }
-  getPrices(input:string,filledSections:Section[]): any {
-    let finalData = {
-      email: input,
-      lowerEstimate: 0,
-      upperEstimate: 0,
-      questions: Array<Question>(),
-    };
-    let arr: Question[] = [];
-    for (let i = 0; i < filledSections.length; i++) {
-      arr = [...filledSections[i].questions, ...arr];
-    }
-    finalData['questions'] = arr;
+  getPrices(finalData:Submission): Promise<Submission> {
     return new Promise((resolve,reject)=>{
-      this.http.post(this.url+'/submissions', finalData).subscribe(
+      this.http.post<Submission>(this.url+'/submissions', finalData).subscribe(
         (data)=>{
           resolve(data);
         },
@@ -83,16 +73,16 @@ export class SectionService {
       );
     }); 
   }
-  getQuestionToAppendAnswers(indexOfSection: number, indexOfQuestion: number) {
+  getQuestionToAppendAnswers(indexOfSection: number, indexOfQuestion: number):Question {
     return this.sectionsWithoutOptions[indexOfSection].questions[indexOfQuestion];
   }
-  getQuestion(indexOfSection: number, indexOfQuestion: number) {
+  getQuestion(indexOfSection: number, indexOfQuestion: number):Question{
     return this.sections[indexOfSection].questions[indexOfQuestion];
   }
-  getQuestionsLength(indexOfSection: number) {
+  getQuestionsLength(indexOfSection: number):number {
     return this.sections[indexOfSection].questions.length;
   }
-  getFilledSections() {
+  getFilledSections():Section[] {
     this.indices = [];
     let filledSections: Section[] = [];
     for (let i = 0; i < this.sectionsWithoutOptions.length; i++) {
@@ -103,10 +93,10 @@ export class SectionService {
     }
     return filledSections;
   }
-  getIndices() {
+  getIndices():number[] {
     return this.indices;
   }
-  setAnswers(sectionIndex:number,questionIndex:number,answers:Option[]){
+  setAnswers(sectionIndex:number,questionIndex:number,answers:Option[]):void{
     this.sectionsWithoutOptions[sectionIndex].questions[questionIndex].options=answers;
   }
 }

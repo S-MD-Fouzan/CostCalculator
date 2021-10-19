@@ -1,7 +1,7 @@
 <div class="mt-10 summary space-y-5 sm:pl-5 sm:pr-5">
   <div
     *ngIf="costSpinner"
-    class="flex flex-col justify-center items-center w-screen spinner"
+    class="h-screen flex flex-col justify-center items-center w-screen spinner"
   >
     <diV class="flex flex-col justify-center items-center">
       <div><mat-spinner></mat-spinner></div>
@@ -59,7 +59,7 @@
 
   <mat-accordion class="mt-5 w-11/12">
     <mat-expansion-panel
-      *ngFor="let section of FilledSectionsArray; let i = index"
+      *ngFor="let section of filledSectionsArray; let i = index"
       [expanded]="step === i"
       (opened)="setStep(i)"
       hideToggle

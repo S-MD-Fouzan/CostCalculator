@@ -12,10 +12,11 @@ export class AlertBoxComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  close(){
+  
+  close():void{
     this.dialogRef.close(false);
   }
-  proceed(){
+  proceed():void{
     this.dialogRef.close(true);
   }
 }

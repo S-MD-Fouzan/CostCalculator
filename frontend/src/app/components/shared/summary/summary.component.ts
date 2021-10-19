@@ -19,6 +19,7 @@ export class SummaryComponent implements OnInit {
     this.questionsWithSelectedOptions = this.sectionService.getQuestionsForSavingAnswers(this.indexOfSection);
     this.section = this.sectionService.getSection(this.indexOfSection);
   }
+  
   isEmpty(questions: Question[]): boolean {
     if (questions[0].options.length > 0) {
       return true;

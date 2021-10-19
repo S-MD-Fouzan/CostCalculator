@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { SectionService } from '../../../services/section.service';
 import { Section } from '../../../models/section.model';
 import { MatStepper } from '@angular/material/stepper';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertBoxComponent } from '../../shared/alert-box/alert-box.component';
-import { MatTooltipDefaultOptions, MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
+import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-all-sections',
@@ -32,19 +32,29 @@ export class AllSectionsComponent implements OnInit {
   hide: boolean;
   nextDisabled: boolean;
   final: boolean;
-  FinalSectionsWithAnswers: Section[];
+  sectionsWithAnswers: Section[];
   selectedIndex: number;
-  sectionsWithoutGeneralQuestions: Section[];
-  FilledSectionsArray: Section[] = [];
   indices: number[];
   cardStringControl: string = "";
   costDisplayer: boolean;
 
   constructor(private sectionService: SectionService,private dialog: MatDialog) {}
 
+  ngOnInit(): void {
+    this.costDisplayer = true;
+    this.selectedIndex = 0;
+    this.final = true;
+    this.nextDisabled = true;
+    this.hide = false;
+    this.sections=this.sectionService.getSections();
+    this.widthsArray = this.sectionService.widthsArray;
+    this.sectionColoring = this.sectionService.sectionColoring;
+    this.cardStringControl=this.sectionService.cardStringControl;
+    this.length = this.sections.length+1;
+    this.sectionsWithAnswers=this.sectionService.getSectionsWithAnswers();
+  }
 
-  sectionChange(index:number){
-    console.log(this.widthsArray+" "+this.sectionColoring);
+  sectionChange(index:number):void {
     if(this.widthsArray[index]>0){
       this.cardStringControl='Edit section';
       this.sectionService.cardStringControl='Edit Section';
@@ -59,22 +69,22 @@ export class AllSectionsComponent implements OnInit {
     }
     this.selectedIndex=index;
   }
-  buttonToggler($event: any) {
+  buttonToggler($event: any):void {
     if ($event == 'true') {
       this.nextDisabled = false;
     }
   }
-  adjustingWidth($event: any, index: number) {
+  adjustingWidth($event: any, index: number):void {
     this.widthsArray[index] = $event;
   }
-  switchIt(stepper: MatStepper,check:boolean) {
+  switchIt(stepper: MatStepper,check:boolean):void {
     if (stepper.selectedIndex !== this.sectionService.getSectionsLength()-1) {
-      if(this.FinalSectionsWithAnswers[stepper.selectedIndex].questions[0].options.length>0 && check==true){
+      if(this.sectionsWithAnswers[stepper.selectedIndex].questions[0].options.length>0 && check==true){
         const dialogRef = this.dialog.open(AlertBoxComponent);
         dialogRef.afterClosed().subscribe(result => {
           if(result){
-            for(let i=0;i<this.FinalSectionsWithAnswers[stepper.selectedIndex].questions.length;i++){
-              this.FinalSectionsWithAnswers[stepper.selectedIndex].questions[i].options=[];
+            for(let i=0;i<this.sectionsWithAnswers[stepper.selectedIndex].questions.length;i++){
+              this.sectionsWithAnswers[stepper.selectedIndex].questions[i].options=[];
             }
             this.widthsArray[stepper.selectedIndex] = 0;
             this.sectionColoring[stepper.selectedIndex] = true;
@@ -92,7 +102,7 @@ export class AllSectionsComponent implements OnInit {
       }
     } else {
       this.final = false;
-      this.FinalSectionsWithAnswers = this.sectionService.getSectionsWithAnswers();
+      this.sectionsWithAnswers = this.sectionService.getSectionsWithAnswers();
     }
   }
   OnStep(event: any): void {
@@ -102,18 +112,5 @@ export class AllSectionsComponent implements OnInit {
   }
   ToHide(): void {
     this.hide = true;
-  }
-  ngOnInit(): void {
-    this.costDisplayer = true;
-    this.selectedIndex = 0;
-    this.final = true;
-    this.nextDisabled = true;
-    this.hide = false;
-    this.sections=this.sectionService.getSections();
-    this.widthsArray = this.sectionService.widthsArray;
-    this.sectionColoring = this.sectionService.sectionColoring;
-    this.cardStringControl=this.sectionService.cardStringControl;
-    this.length = this.sections.length+1;
-    this.FinalSectionsWithAnswers=this.sectionService.getSectionsWithAnswers();
   }
 }

@@ -41,9 +41,61 @@ export class QuestionComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private sectionService: SectionService
   ) {}
-  onClick(otherChip: MatChip) {
+
+  ngOnInit(): void {
+    this.questionToAppendAnswers =
+      this.sectionService.getQuestionToAppendAnswers(
+        this.indexOfSection,
+        this.indexOfQuestion
+      );
+    this.selectedOptions = [];
+    this.previous = false;
+    this.currentQuestion = this.sectionService.getQuestion(
+      this.indexOfSection,
+      this.indexOfQuestion
+    );
+    this.currentOptions = this.currentQuestion.options;
+    if (this.questionToAppendAnswers.options.length > 0) {
+      if (this.currentQuestion.multiple_allowed == true) {
+        this.answersFormControl.setValue(this.questionToAppendAnswers.options);
+      } else {
+        this.selected = this.currentQuestion.options.indexOf(
+          this.questionToAppendAnswers.options[0]
+        );
+      }
+    } else {
+      this.selected = -1;
+    }
+  }
+  
+  ngOnChanges(changes: SimpleChanges) {
+    this.questionToAppendAnswers =
+      this.sectionService.getQuestionToAppendAnswers(
+        this.indexOfSection,
+        this.indexOfQuestion
+      );
+    this.currentQuestion = this.sectionService.getQuestion(
+      this.indexOfSection,
+      this.indexOfQuestion
+    );
+    this.currentOptions = this.currentQuestion.options;
+    if (this.questionToAppendAnswers.options.length > 0) {
+      if (this.currentQuestion.multiple_allowed == true) {
+        this.answersFormControl.setValue(this.questionToAppendAnswers.options);
+      } else {
+        this.selected = this.currentQuestion.options.indexOf(
+          this.questionToAppendAnswers.options[0]
+        );
+      }
+    } else {
+      this.selected = -1;
+    }
+  }
+
+  onClick(otherChip: MatChip):void{
     otherChip.toggleSelected(true);
   }
+
   onNext(): void {
     if (this.currentQuestion.multiple_allowed == true) {
       if (this.answersFormControl.value == null || this.answersFormControl.value.length == 0) {
@@ -74,61 +126,15 @@ export class QuestionComponent implements OnInit {
       }
     }
   }
+
   onPrev(): void {
     this.inPrev.emit(this.indexOfQuestion);
     if (this.indexOfQuestion - 1 == 0) {
       this.previous = false;
     }
   }
-  ngOnChanges(changes: SimpleChanges) {
-    this.questionToAppendAnswers =
-      this.sectionService.getQuestionToAppendAnswers(
-        this.indexOfSection,
-        this.indexOfQuestion
-      );
-    this.currentQuestion = this.sectionService.getQuestion(
-      this.indexOfSection,
-      this.indexOfQuestion
-    );
-    this.currentOptions = this.currentQuestion.options;
-    if (this.questionToAppendAnswers.options.length > 0) {
-      if (this.currentQuestion.multiple_allowed == true) {
-        this.answersFormControl.setValue(this.questionToAppendAnswers.options);
-      } else {
-        this.selected = this.currentQuestion.options.indexOf(
-          this.questionToAppendAnswers.options[0]
-        );
-      }
-    } else {
-      this.selected = -1;
-    }
-  }
-  ngOnInit(): void {
-    this.questionToAppendAnswers =
-      this.sectionService.getQuestionToAppendAnswers(
-        this.indexOfSection,
-        this.indexOfQuestion
-      );
-    this.selectedOptions = [];
-    this.previous = false;
-    this.currentQuestion = this.sectionService.getQuestion(
-      this.indexOfSection,
-      this.indexOfQuestion
-    );
-    this.currentOptions = this.currentQuestion.options;
-    if (this.questionToAppendAnswers.options.length > 0) {
-      if (this.currentQuestion.multiple_allowed == true) {
-        this.answersFormControl.setValue(this.questionToAppendAnswers.options);
-      } else {
-        this.selected = this.currentQuestion.options.indexOf(
-          this.questionToAppendAnswers.options[0]
-        );
-      }
-    } else {
-      this.selected = -1;
-    }
-  }
-  onClicked(i: number, option: Option) {
+  
+  onClicked(i: number, option: Option):void{
     this.sectionService.setAnswers(this.indexOfSection,this.indexOfQuestion,[option]);
     this.selected = i;
   }
