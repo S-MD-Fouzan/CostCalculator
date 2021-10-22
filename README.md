@@ -38,20 +38,25 @@ The questions that were asked in each section cover digital aspects essential to
 ## Configuring Backend
 > Run `cd CostCalculator\backend` to navigate to the backend folder.<br/>
 > Run `npm install` to install the required dependencies.<br/>
-> If you want to change the database settings you can follow the below instructions or you can directly jump onto running the strapi server.<br/>
+
+If you want to change the database settings you can follow the below instructions or you can directly jump onto running the strapi server as the backend is already configured to use MongoDB Cluster and includes all the data of Sections.<br/>
 > Open the file `backend/config/database.js`<br/> 
 * Add your database host in attribute "host". For example, type "localhost" if in case your database is running locally.<br/>
 * Remove the attribute "srv" incase if you are running the database locally, otherwise set it to true.<br/>
 * Add database name, username and password to the respective attributes as you need.
 > Run `npm run develop` to run the strapi server.<br/>
-> Run `http://localhost:1337/admin` in your browser to open the admin panel and you can add data accordingly by navigating to "Sections" collection type.<br/>
-> You can log into admin panel with the following admin credentials.<br/>
+> Run `http://localhost:1337/admin` in your browser to open the admin panel and if you have changed the database you can add data accordingly by navigating to "Sections" collection type.<br/>
+
+You can log into admin panel with the following admin credentials.<br/>
 * Email ID : `testing@email.com`
 * Password : `Testing123`
-> Skip the below point if you didn't change the database.<br/>
-> Navigate to settings > under Users & Permissions Plugin, click on Roles > click on public > under Permissions, click select all checkbox for `Section` and `Submission` Collection types.
+
+Skip the below point if you didn't change the database.<br/>
+
+Navigate to settings > under Users & Permissions Plugin, click on Roles > click on public > under Permissions, click select all checkbox for `Section` and `Submission` Collection types.
 ## Configuring Frontend
 > Run `cd CostCalculator\frontend` to navigate to the frontend folder.<br/>
 > Run `npm install` to install the required dependencies.<br/>
 > Run `ng serve` to run the application and before running it make sure that backend is functioning well.<br/>
-> If you need to modify the backend URL, you can edit it in `frontend\src\environments\environment.ts`.
+ 
+If you need to modify the backend URL, you can edit it in `frontend\src\environments\environment.ts`.
