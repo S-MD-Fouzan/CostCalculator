@@ -78,8 +78,7 @@ export class AllSectionsComponent implements OnInit {
     this.widthsArray[index] = $event;
   }
   switchIt(stepper: MatStepper,check:boolean):void {
-    if (stepper.selectedIndex !== this.sectionService.getSectionsLength()-1) {
-      if(this.sectionsWithAnswers[stepper.selectedIndex].questions[0].options.length>0 && check==true){
+    if(this.sectionsWithAnswers[stepper.selectedIndex].questions[0].options.length>0 && check==true){
         const dialogRef = this.dialog.open(AlertBoxComponent);
         dialogRef.afterClosed().subscribe(result => {
           if(result){
@@ -88,22 +87,32 @@ export class AllSectionsComponent implements OnInit {
             }
             this.widthsArray[stepper.selectedIndex] = 0;
             this.sectionColoring[stepper.selectedIndex] = true;
-            stepper.next();
-            this.sectionChange(stepper.selectedIndex);
+            if(stepper.selectedIndex === this.sectionService.getSectionsLength()-1){
+              this.final = false;
+              this.sectionColoring[this.selectedIndex]=true;
+              this.sectionsWithAnswers = this.sectionService.getSectionsWithAnswers();
+            }
+            else{
+              stepper.next();
+              this.sectionChange(stepper.selectedIndex);
+            }
           }
           this.selectedIndex = stepper.selectedIndex;
         });
       }
       else{
+        if(stepper.selectedIndex === this.sectionService.getSectionsLength()-1){
+          this.final = false;
+          this.sectionColoring[this.selectedIndex]=true;
+          this.sectionsWithAnswers = this.sectionService.getSectionsWithAnswers();
+        }
+        else{
         this.sectionColoring[stepper.selectedIndex] = true;
         stepper.next();
         this.sectionChange(stepper.selectedIndex);
         this.selectedIndex=stepper.selectedIndex;
+        }
       }
-    } else {
-      this.final = false;
-      this.sectionsWithAnswers = this.sectionService.getSectionsWithAnswers();
-    }
   }
   OnStep(event: any): void {
     this.nextDisabled = true;

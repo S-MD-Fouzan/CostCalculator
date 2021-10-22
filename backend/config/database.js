@@ -4,12 +4,12 @@ module.exports = ({ env }) => ({
     default: {
       connector: 'mongoose',
       settings: {
-        host: env('DATABASE_HOST', 'cluster0.gf6mr.mongodb.net'),
+        host: env('DATABASE_HOST', 'cluster0.ei88r.mongodb.net'),
         srv: env.bool('DATABASE_SRV', true),
         port: env.int('DATABASE_PORT', 27017),
-        database: env('DATABASE_NAME', 'backend'),
-        username: env('DATABASE_USERNAME', 'mits'),
-        password: env('DATABASE_PASSWORD', 'mits01'),
+        database: env('DATABASE_NAME', 'CostCalculator'),
+        username: env('DATABASE_USERNAME', 'user'),
+        password: env('DATABASE_PASSWORD', 'user123'),
       },
       options: {
         authenticationDatabase: env('AUTHENTICATION_DATABASE', null),
