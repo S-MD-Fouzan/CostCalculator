@@ -1,5 +1,7 @@
+<div class="w-96 h-auto">
 <h1 mat-dialog-title class="text-2xl text-center">Your stored data will be lost!!</h1>
-<div mat-dialog-actions>
-<button mat-button (click)="close()" class="cancel float-right mr-5 mt-10 rounded-lg">Cancel</button>
-<button mat-button class="ok float-right mr-5 mt-10 rounded-lg" (click)="proceed()">Ok</button>
+<div mat-dialog-actions class="flex flex-row justify-center items-center mb-3">
+<div><button mat-button (click)="close()" class="float-right mr-5 mt-5 rounded-lg cancel">Cancel</button></div>
+<div><button mat-button class="float-right mr-5 mt-5 rounded-lg ok" (click)="proceed()">Ok</button></div>
+</div>
 </div>

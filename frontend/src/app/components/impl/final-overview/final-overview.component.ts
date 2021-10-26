@@ -22,6 +22,7 @@ export class FinalOverviewComponent implements OnInit {
     Validators.email,
   ]);
   costDisplayer: boolean;
+  arrayOfQuestionsWithAnswers: Question[] = [];
   step:number = 0;
   constructor(private sectionService:SectionService) { }
 
@@ -50,11 +51,10 @@ export class FinalOverviewComponent implements OnInit {
       finalData.email=this.emailFormControl.value;
       finalData.lowerEstimate=0;
       finalData.upperEstimate=0;
-      let arrayOfQuestionsWithAnswers: Question[] = [];
       for (let i = 0; i < this.filledSectionsArray.length; i++) {
-        arrayOfQuestionsWithAnswers= [...this.filledSectionsArray[i].questions, ...arrayOfQuestionsWithAnswers];
+        this.arrayOfQuestionsWithAnswers= [...this.filledSectionsArray[i].questions, ...this.arrayOfQuestionsWithAnswers];
       }
-      finalData.questions = arrayOfQuestionsWithAnswers;
+      finalData.questions = this.arrayOfQuestionsWithAnswers;
       this.sectionService.getPrices(finalData).then((submission: Submission) => {
         this.minPrice = submission.lowerEstimate;
         this.maxPrice = submission.upperEstimate;

@@ -13,6 +13,7 @@ export class SectionService {
   indices: number[];
   sections:Section[]=[];
   cardStringControl: string = "";
+  skipStringControl: string = "";
   widthsArray: number[]=[];
   sectionColoring: boolean[]=[];
   sectionsWithoutOptions:Section[]=[];
@@ -34,6 +35,7 @@ export class SectionService {
     this.sectionColoring = new Array(this.sections.length+1).fill(false);
     this.sectionColoring[0] = true;
     this.cardStringControl='Get Started';
+    this.skipStringControl='Skip';
     this.sections=prods;
     if(this.sectionsWithoutOptions.length===0){
       for(let i=0;i<this.sections.length;i++){
