@@ -56,7 +56,7 @@ Skip the below point if you didn't change the database.<br/>
 Navigate to settings > under Users & Permissions Plugin, click on Roles > click on public > under Permissions, click select all checkbox for `Section` and `Submission` Collection types.
 ### Running the server
 > Run `npm run develop` to run the strapi server.<br/>
-> Run `http://localhost:1337/admin` in your browser to open the admin panel and if you have changed the database you can add data accordingly by navigating to "Sections" collection type.<br/>
+> Run `http://localhost:1337/admin` in your browser to open the admin panel and if you have changed the database you can add data accordingly by navigating to `Sections` collection type.<br/>
 ## Configuring Frontend
 > Run `cd CostCalculator\frontend` to navigate to the frontend folder.<br/>
 > Run `npm install` to install the required dependencies.<br/>
