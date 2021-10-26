@@ -24,7 +24,7 @@
     class="flex flex-col flex-wrap justify-center items-center gap-5"
   >
     <h1 class="text-3xl text-black text-center text">
-      Please enter your Email to get the results
+      Please enter your Email to receive your estimate
     </h1>
     <form
       (ngSubmit)="onSubmit()"
@@ -35,7 +35,7 @@
         class="flex flex-col min-h-16 text md:w-96 lg:w-96 sm:w-80"
       >
         <mat-label>Email</mat-label>
-        <input type="email" matInput [formControl]="emailFormControl" />
+        <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"/>
         <mat-error
           *ngIf="
             emailFormControl.hasError('email') &&
