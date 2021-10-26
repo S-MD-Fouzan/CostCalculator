@@ -2,14 +2,14 @@
 ## General
 The main goal of our application is to estimate the cost of a digital solution based on features that a user selects.<br/>
 This app is built using Angular for frontend and strapi (Headless CMS) for backend with MongoDB as database.<br/>
-We have five different sections in our application 
+The questions that the user must answer are divided into five different sections.
 * General Questions.
 * Strategy.
 * UX/UI.
 * Development.
 * Product Growth. 
 
-If you need to cover few more digital aspects, you can directly add a new section object in the backend and frontend is dynamic enough to work with multiple sections.<br/>
+To add more questions for the users to answer, existing sections can be modified to add more questions or an entirely new section can be added via Strapi, the frontend will adapt to any number of sections and questions.<br/>
 The questions that were asked in each section cover digital aspects essential to estimate that particular section.
 ## Structure of Data
 > Collections in strapi:
@@ -38,14 +38,14 @@ The questions that were asked in each section cover digital aspects essential to
 ## Configuring Backend
 > Run `cd CostCalculator\backend` to navigate to the backend folder.<br/>
 > Run `npm install` to install the required dependencies.<br/>
+### Database Configuration
 
-If you want to change the database settings you can follow the below instructions or you can directly jump onto running the strapi server as the backend is already configured to use MongoDB Cluster and includes all the data of Sections.<br/>
+The Strapi backend has already been configured to use a pre-existing MongoDB Cluster which has already been populated with questions and sections. You can run the Strapi server after cloning (and after npm install) and the data should be available already. 
+In case you would like to change the database, or use a local instance you can do the following :<br/>
 > Open the file `backend/config/database.js`<br/> 
 * Add your database host in attribute "host". For example, type "localhost" if in case your database is running locally.<br/>
 * Remove the attribute "srv" incase if you are running the database locally, otherwise set it to true.<br/>
 * Add database name, username and password to the respective attributes as you need.
-> Run `npm run develop` to run the strapi server.<br/>
-> Run `http://localhost:1337/admin` in your browser to open the admin panel and if you have changed the database you can add data accordingly by navigating to "Sections" collection type.<br/>
 
 You can log into admin panel with the following admin credentials.<br/>
 * Email ID : `testing@email.com`
@@ -54,6 +54,9 @@ You can log into admin panel with the following admin credentials.<br/>
 Skip the below point if you didn't change the database.<br/>
 
 Navigate to settings > under Users & Permissions Plugin, click on Roles > click on public > under Permissions, click select all checkbox for `Section` and `Submission` Collection types.
+### Running the server
+> Run `npm run develop` to run the strapi server.<br/>
+> Run `http://localhost:1337/admin` in your browser to open the admin panel and if you have changed the database you can add data accordingly by navigating to "Sections" collection type.<br/>
 ## Configuring Frontend
 > Run `cd CostCalculator\frontend` to navigate to the frontend folder.<br/>
 > Run `npm install` to install the required dependencies.<br/>
