@@ -36,6 +36,7 @@ export class AllSectionsComponent implements OnInit {
   selectedIndex: number;
   indices: number[];
   cardStringControl: string = "";
+  skipStringControl: string = "";
   costDisplayer: boolean;
 
   constructor(private sectionService: SectionService,private dialog: MatDialog) {}
@@ -50,6 +51,7 @@ export class AllSectionsComponent implements OnInit {
     this.widthsArray = this.sectionService.widthsArray;
     this.sectionColoring = this.sectionService.sectionColoring;
     this.cardStringControl=this.sectionService.cardStringControl;
+    this.skipStringControl=this.sectionService.skipStringControl;
     this.length = this.sections.length+1;
     this.sectionsWithAnswers=this.sectionService.getSectionsWithAnswers();
   }
@@ -58,9 +60,13 @@ export class AllSectionsComponent implements OnInit {
     if(this.widthsArray[index]>0){
       this.cardStringControl='Edit section';
       this.sectionService.cardStringControl='Edit Section';
+      this.skipStringControl='Clear';
+      this.sectionService.skipStringControl='Clear';
     }else{
       this.cardStringControl='Get Started';
       this.sectionService.cardStringControl='Get Started';
+      this.skipStringControl='Skip';
+      this.sectionService.skipStringControl='Skip';
     }
     if(this.widthsArray[this.selectedIndex]>99){
       this.sectionColoring[this.selectedIndex]=true;
@@ -78,7 +84,7 @@ export class AllSectionsComponent implements OnInit {
     this.widthsArray[index] = $event;
   }
   switchIt(stepper: MatStepper,check:boolean):void {
-    if(this.sectionsWithAnswers[stepper.selectedIndex].questions[0].options.length>0 && check==true){
+      if(this.sectionsWithAnswers[stepper.selectedIndex].questions[0].options.length>0 && check==true){
         const dialogRef = this.dialog.open(AlertBoxComponent);
         dialogRef.afterClosed().subscribe(result => {
           if(result){

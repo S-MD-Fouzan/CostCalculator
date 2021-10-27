@@ -1,7 +1,7 @@
 <div class="addFont">
   <div
     *ngIf="final"
-    class="w-full h-full flex flex-col justify-center items-center py-10"
+    class="w-full h-full flex flex-col justify-center py-10"
   >
     <div class="flex flex-row justify-center my-4 pb-4">
       <div
@@ -155,7 +155,7 @@
                     (click)="switchIt(stepper, true)"
                     class="text-lg py-2 px-4 rounded-lg SkipButton"
                   >
-                    Skip {{ section.stepLabel }}
+                    {{ skipStringControl }} {{ section.stepLabel }}
                   </button>
                 </div>
               </mat-card-actions>
@@ -171,12 +171,8 @@
           <div
             class="
               flex flex-row flex-wrap
-              justify-end
-              w-11/12
-              mt-5
-              sm:mr-5
-              md:mr-5
-              lg:mr-10
+              justify-center
+              mt-5            
             "
           >
             <button
