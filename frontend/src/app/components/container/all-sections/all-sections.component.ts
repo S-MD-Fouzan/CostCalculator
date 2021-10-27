@@ -50,23 +50,23 @@ export class AllSectionsComponent implements OnInit {
     this.sections=this.sectionService.getSections();
     this.widthsArray = this.sectionService.widthsArray;
     this.sectionColoring = this.sectionService.sectionColoring;
-    this.cardStringControl=this.sectionService.cardStringControl;
-    this.skipStringControl=this.sectionService.skipStringControl;
+    this.cardStringControl=this.sectionService.cardStringControlArray[0];
+    this.skipStringControl=this.sectionService.skipStringControlArray[0];
     this.length = this.sections.length+1;
     this.sectionsWithAnswers=this.sectionService.getSectionsWithAnswers();
   }
 
   sectionChange(index:number):void {
     if(this.widthsArray[index]>0){
-      this.cardStringControl='Edit section';
-      this.sectionService.cardStringControl='Edit Section';
-      this.skipStringControl='Clear';
-      this.sectionService.skipStringControl='Clear';
+      this.sectionService.cardStringControlArray[index]='Edit Section';
+      this.cardStringControl=this.sectionService.cardStringControlArray[index];
+      this.sectionService.skipStringControlArray[index]='Clear';
+      this.skipStringControl=this.sectionService.skipStringControlArray[index];
     }else{
-      this.cardStringControl='Get Started';
-      this.sectionService.cardStringControl='Get Started';
-      this.skipStringControl='Skip';
-      this.sectionService.skipStringControl='Skip';
+      this.sectionService.cardStringControlArray[index]='Get Started';
+      this.cardStringControl=this.sectionService.cardStringControlArray[index];
+      this.sectionService.skipStringControlArray[index]='Skip';
+      this.skipStringControl=this.sectionService.skipStringControlArray[index];
     }
     if(this.widthsArray[this.selectedIndex]>99){
       this.sectionColoring[this.selectedIndex]=true;

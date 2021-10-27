@@ -12,11 +12,11 @@ export class SectionService {
   url:string=environment.API_URL;
   indices: number[];
   sections:Section[]=[];
-  cardStringControl: string = "";
-  skipStringControl: string = "";
   widthsArray: number[]=[];
   sectionColoring: boolean[]=[];
   sectionsWithoutOptions:Section[]=[];
+  cardStringControlArray: string[]=[];
+  skipStringControlArray: string[]=[];
   constructor(private http:HttpClient) {}
   getSectionsFromServer():Promise<Section[]>{
     return new Promise((resolve,reject)=>{
@@ -34,8 +34,10 @@ export class SectionService {
     this.widthsArray = new Array(this.sections.length+1).fill(0);
     this.sectionColoring = new Array(this.sections.length+1).fill(false);
     this.sectionColoring[0] = true;
-    this.cardStringControl='Get Started';
-    this.skipStringControl='Skip';
+    for(let i=0;i<prods.length;i++){
+      this.cardStringControlArray[i]='Get Started';
+      this.skipStringControlArray[i]='Skip';
+    }
     this.sections=prods;
     if(this.sectionsWithoutOptions.length===0){
       for(let i=0;i<this.sections.length;i++){

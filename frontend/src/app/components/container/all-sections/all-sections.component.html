@@ -122,6 +122,7 @@
         #stepper
       >
         <mat-step *ngFor="let section of sections; let i = index">
+          <div class="w-full h-full flex flex-col justify-center">
           <div
             *ngIf="!hide"
             class="flex flex-col flex-wrap justify-center items-center"
@@ -171,8 +172,10 @@
           <div
             class="
               flex flex-row flex-wrap
-              justify-center
-              mt-5            
+              justify-end
+              mt-5
+              w-4/5
+              self-center          
             "
           >
             <button
@@ -182,6 +185,7 @@
             >
               Next
             </button>
+          </div>
           </div>
         </mat-step>
       </mat-stepper>
