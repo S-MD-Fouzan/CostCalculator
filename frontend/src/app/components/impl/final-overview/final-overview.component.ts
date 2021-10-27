@@ -22,6 +22,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class FinalOverviewComponent implements OnInit {
   minPrice: number;
   maxPrice: number;
+  isEmpty: boolean;
   sectionsWithoutGeneralQuestions : Section[];
   filledSectionsArray: Section[] = [];
   indices: number[];
@@ -40,6 +41,12 @@ export class FinalOverviewComponent implements OnInit {
     this.costDisplayer = true;
     this.filledSectionsArray=this.sectionService.getFilledSections();
     this.indices=this.sectionService.getIndices();
+    if(this.filledSectionsArray.length==0){
+      this.isEmpty=true;
+    }
+    else{
+      this.isEmpty=false;
+    }
   }
 
   setStep(index: number):void {
