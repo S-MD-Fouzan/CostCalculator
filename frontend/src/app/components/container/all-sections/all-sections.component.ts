@@ -36,6 +36,7 @@ export class AllSectionsComponent implements OnInit {
   selectedIndex: number;
   indices: number[];
   cardStringControl: string = "";
+  skipStringControl: string = "";
   costDisplayer: boolean;
 
   constructor(private sectionService: SectionService,private dialog: MatDialog) {}
@@ -49,18 +50,23 @@ export class AllSectionsComponent implements OnInit {
     this.sections=this.sectionService.getSections();
     this.widthsArray = this.sectionService.widthsArray;
     this.sectionColoring = this.sectionService.sectionColoring;
-    this.cardStringControl=this.sectionService.cardStringControl;
+    this.cardStringControl=this.sectionService.cardStringControlArray[0];
+    this.skipStringControl=this.sectionService.skipStringControlArray[0];
     this.length = this.sections.length+1;
     this.sectionsWithAnswers=this.sectionService.getSectionsWithAnswers();
   }
 
   sectionChange(index:number):void {
     if(this.widthsArray[index]>0){
-      this.cardStringControl='Edit section';
-      this.sectionService.cardStringControl='Edit Section';
+      this.sectionService.cardStringControlArray[index]='Edit Section';
+      this.cardStringControl=this.sectionService.cardStringControlArray[index];
+      this.sectionService.skipStringControlArray[index]='Clear';
+      this.skipStringControl=this.sectionService.skipStringControlArray[index];
     }else{
-      this.cardStringControl='Get Started';
-      this.sectionService.cardStringControl='Get Started';
+      this.sectionService.cardStringControlArray[index]='Get Started';
+      this.cardStringControl=this.sectionService.cardStringControlArray[index];
+      this.sectionService.skipStringControlArray[index]='Skip';
+      this.skipStringControl=this.sectionService.skipStringControlArray[index];
     }
     if(this.widthsArray[this.selectedIndex]>99){
       this.sectionColoring[this.selectedIndex]=true;
@@ -78,7 +84,7 @@ export class AllSectionsComponent implements OnInit {
     this.widthsArray[index] = $event;
   }
   switchIt(stepper: MatStepper,check:boolean):void {
-    if(this.sectionsWithAnswers[stepper.selectedIndex].questions[0].options.length>0 && check==true){
+      if(this.sectionsWithAnswers[stepper.selectedIndex].questions[0].options.length>0 && check==true){
         const dialogRef = this.dialog.open(AlertBoxComponent);
         dialogRef.afterClosed().subscribe(result => {
           if(result){

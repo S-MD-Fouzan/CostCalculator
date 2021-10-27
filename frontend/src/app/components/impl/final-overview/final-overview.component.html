@@ -1,4 +1,8 @@
 <div class="mt-10 summary space-y-5 sm:pl-5 sm:pr-5">
+  <div *ngIf="isEmpty" class="w-full h-full flex justify-center text-2xl mt-14 text">
+    <h1>You haven't answered any of the questions.</h1>
+  </div>
+  <div *ngIf="!isEmpty" class="w-full h-full flex flex-col justify-center items-center">
   <div
     *ngIf="costSpinner"
     class="h-screen flex flex-col justify-center items-center w-screen spinner"
@@ -24,7 +28,7 @@
     class="flex flex-col flex-wrap justify-center items-center gap-5"
   >
     <h1 class="text-3xl text-black text-center text">
-      Please enter your Email to get the results
+      Please enter your Email to receive your estimate
     </h1>
     <form
       (ngSubmit)="onSubmit()"
@@ -35,11 +39,16 @@
         class="flex flex-col min-h-16 text md:w-96 lg:w-96 sm:w-80"
       >
         <mat-label>Email</mat-label>
-        <input type="email" matInput [formControl]="emailFormControl" />
+        <input
+          type="email"
+          matInput
+          [formControl]="emailFormControl"
+          [errorStateMatcher]="matcher"
+        />
         <mat-error
           *ngIf="
-            emailFormControl.hasError('email') &&
-            !emailFormControl.hasError('required')
+            !emailFormControl.hasError('required') &&
+            emailFormControl.hasError('pattern')
           "
         >
           Please enter a valid email address
@@ -73,22 +82,24 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <app-summary [indexOfSection]="indices[i]"></app-summary>
-      <mat-action-row>
-        <div class="flex flex-row flex-wrap gap-2 justify-end mr-5">
-          <button
-            (click)="prevStep()"
-            class="text-lg py-2 px-4 rounded-lg previousButton"
-          >
-            Previous
-          </button>
-          <button
-            (click)="nextStep()"
-            class="text-lg py-2 px-4 rounded-lg nextButton"
-          >
-            Next
-          </button>
-        </div>
+      <mat-action-row
+        class="flex flex-row flex-wrap gap-2 justify-end mr-5"
+        *ngIf="filledSectionsArray.length !== 1"
+      >
+        <button
+          (click)="prevStep()"
+          class="text-lg py-2 px-4 rounded-lg previousButton"
+        >
+          Previous
+        </button>
+        <button
+          (click)="nextStep()"
+          class="text-lg py-2 px-4 rounded-lg nextButton"
+        >
+          Next
+        </button>
       </mat-action-row>
     </mat-expansion-panel>
   </mat-accordion>
+  </div>
 </div>
