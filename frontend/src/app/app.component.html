@@ -1,7 +1,18 @@
-<div *ngIf="spinner"  class="flex flex-col justify-center items-center h-screen w-screen">
-    <div><mat-spinner></mat-spinner></div>
+<div
+  *ngIf="spinner"
+  class="flex flex-col justify-center items-center h-screen w-screen"
+>
+  <div><mat-spinner></mat-spinner></div>
   <div class="pt-5 text-2xl"><h1>Fetching resources...</h1></div>
+</div>
+<div *ngIf="!spinner">
+  <div
+    *ngIf="error"
+    class="h-screen w-screen flex flex-col justify-center items-center gap-10"
+  >
+    <h1 class="text-4xl text-center">Error 500 : Internal Server Error</h1>
   </div>
-  <div *ngIf="!spinner">
+  <div *ngIf="!error">
     <router-outlet></router-outlet>
   </div>
+</div>

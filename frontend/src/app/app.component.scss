@@ -2,3 +2,6 @@
 ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
     stroke: $primary;
   }
+.iconSize{
+  transform: scale(4);
+}

@@ -35,6 +35,7 @@ export class FinalOverviewComponent implements OnInit {
   costDisplayer: boolean;
   arrayOfQuestionsWithAnswers: Question[] = [];
   step:number = 0;
+  error: boolean = false;
   constructor(private sectionService:SectionService) { }
 
   ngOnInit(): void {
@@ -78,6 +79,8 @@ export class FinalOverviewComponent implements OnInit {
         this.costDisplayer = false;
         this.costSpinner=false;
       }).catch((err:any)=>{
+        this.costSpinner=false;
+        this.error=true;
         console.log(err);
       })
     }
