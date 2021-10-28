@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { SectionService } from '../../../services/section.service';
 import { Section } from '../../../models/section.model';
@@ -40,6 +40,12 @@ export class AllSectionsComponent implements OnInit {
   costDisplayer: boolean;
 
   constructor(private sectionService: SectionService,private dialog: MatDialog) {}
+  
+  @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
+    if(this.sectionService.refreshHandler){
+      event.returnValue = false;
+    }
+  }
 
   ngOnInit(): void {
     this.costDisplayer = true;

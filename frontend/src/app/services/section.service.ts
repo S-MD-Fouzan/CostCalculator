@@ -17,6 +17,7 @@ export class SectionService {
   sectionsWithoutOptions:Section[]=[];
   cardStringControlArray: string[]=[];
   skipStringControlArray: string[]=[];
+  refreshHandler: boolean = false;
   constructor(private http:HttpClient) {}
   getSectionsFromServer():Promise<Section[]>{
     return new Promise((resolve,reject)=>{
@@ -101,6 +102,7 @@ export class SectionService {
     return this.indices;
   }
   setAnswers(sectionIndex:number,questionIndex:number,answers:Option[]):void{
+    this.refreshHandler=true;
     this.sectionsWithoutOptions[sectionIndex].questions[questionIndex].options=answers;
   }
 }
