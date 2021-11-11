@@ -1,5 +1,5 @@
 "use strict";
-
+require('dotenv').config({path:require('find-config')('.env')})
 const fs = require("fs");
 const path = require("path");
 const mime = require("mime-types");
