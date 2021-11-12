@@ -48,7 +48,13 @@ If you want to change the host, you should open `backend\config\plugins.js` file
 > Open the file `backend\api\submission\controllers\submission.js` and update `from` and `replyTo` fields here as well.<br/>
 
 You need to enable access for less secure apps in the `https://myaccount.google.com/security` page of the account you are using with nodemailer.<br/>
-If in case it is not working, You also need to disable Captcha temporarily which you can do it in the following link `https://accounts.google.com/b/0/displayunlockcaptcha`.  
+If in case it is not working, You also need to disable Captcha temporarily which you can do it in the following link `https://accounts.google.com/b/0/displayunlockcaptcha`.
+
+To work on E-mail templates, you can go to the admin page of Strapi > you will find a plugin named `Email designer` > click on it.<br/>
+> If in case Email designer plugin is not visible in the admin page, you have to run `npm build`.<br/>
+
+You can create E-mail templates or you can modify the existing templates if there are any.<br/>
+You can make use of attributes `templateId` and `sourceCodeToTemplateId` from Email designer object if you ever want to connect template in the code. 
 ### Database Configuration
 
 The Strapi backend has already been configured to use a pre-existing MongoDB Cluster which has already been populated with questions and sections. You can run the Strapi server after cloning (and after npm install) and the data should be available already. 
