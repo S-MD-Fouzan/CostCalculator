@@ -38,6 +38,23 @@ The questions that were asked in each section cover digital aspects essential to
 ## Configuring Backend
 > Run `cd CostCalculator\backend` to navigate to the backend folder.<br/>
 > Run `npm install` to install the required dependencies.<br/>
+
+We are using `Nodemailer` provider for sending E-mails and the application is configured with `Gmail` host.<br/>
+If you want to change the host, you should open `backend\config\plugins.js` file and update the host particular to your E-mail.
+> Create a `.env` file with your E-mail credentials and template for the file is as shown below.<br/>
+* SMTP_USERNAME = `xyz@gmail.com`
+* SMTP_PASSWORD = `xyz.lmn.abc`
+> Open the file `backend\config\plugins.js` and update `defaultFrom` and `defaultReplyTo` fields corresponding to your E-mail.<br/>
+> Open the file `backend\api\submission\controllers\submission.js` and update `from` and `replyTo` fields here as well.<br/>
+
+You need to enable access for less secure apps in the `https://myaccount.google.com/security` page of the account you are using with nodemailer.<br/>
+If in case it is not working, You also need to disable Captcha temporarily which you can do it in the following link `https://accounts.google.com/b/0/displayunlockcaptcha`.
+
+To work on E-mail templates, you can go to the admin page of Strapi > you will find a plugin named `Email designer` > click on it.<br/>
+> If in case Email designer plugin is not visible in the admin page, you have to run `npm build`.<br/>
+
+You can create E-mail templates or you can modify the existing templates if there are any.<br/>
+You can make use of attributes `templateId` and `sourceCodeToTemplateId` from Email designer object if you ever want to connect template in the code. 
 ### Database Configuration
 
 The Strapi backend has already been configured to use a pre-existing MongoDB Cluster which has already been populated with questions and sections. You can run the Strapi server after cloning (and after npm install) and the data should be available already. 

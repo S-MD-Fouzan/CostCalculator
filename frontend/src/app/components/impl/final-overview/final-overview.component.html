@@ -29,9 +29,10 @@
       <h1 class="text-4xl text-center">Error 500 : Internal Server Error</h1>
     </div>
     <div *ngIf="!error" class="flex flex-col items-center w-full h-full">
+      <div class="w-11/12 h-full mt-5">
       <div
         *ngIf="!costDisplayer"
-        class="mt-10 flex flex-col justify-center items-center space-y-5"
+        class="flex flex-col justify-center items-center space-y-5"
       >
         <h1 class="text-4xl text-black text-center text">
           Here's the estimate of your project
@@ -42,7 +43,7 @@
       </div>
       <div
         *ngIf="costDisplayer"
-        class="mt-10 flex flex-col flex-wrap justify-center items-center gap-5"
+        class="flex flex-col flex-wrap justify-center items-center gap-5"
       >
         <h1 class="text-3xl text-black text-center text">
           Please enter your Email to receive your estimate
@@ -51,6 +52,7 @@
           (ngSubmit)="onSubmit()"
           class="flex flex-col justify-center items-center"
         >
+        <div class="flex flex-row flex-wrap justify-center gap-3">
           <mat-form-field
             appearance="outline"
             class="flex flex-col min-h-16 text md:w-96 lg:w-96 sm:w-80"
@@ -76,13 +78,14 @@
           </mat-form-field>
           <button
             type="submit"
-            class="text-lg py-2 px-4 rounded-lg nextButton cursor-pointer"
+            class="text-lg py-2 px-4 h-16 rounded-lg nextButton cursor-pointer"
           >
             Submit
           </button>
+          </div>
         </form>
       </div>
-
+    </div>
       <mat-accordion class="mt-5 w-11/12">
         <mat-expansion-panel
           *ngFor="let section of filledSectionsArray; let i = index"
