@@ -74,6 +74,7 @@ export class FinalOverviewComponent implements OnInit {
       }
       finalData.questions = this.arrayOfQuestionsWithAnswers;
       this.sectionService.getPrices(finalData).then((submission: Submission) => {
+        this.sectionService.refreshHandler=false;
         this.minPrice = submission.lowerEstimate;
         this.maxPrice = submission.upperEstimate;
         this.costDisplayer = false;
