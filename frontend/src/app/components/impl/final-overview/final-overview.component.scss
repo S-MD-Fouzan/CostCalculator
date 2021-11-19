@@ -27,7 +27,7 @@
   align-items: center;
 }
 .text {
-  font-family: "Montserrat-Regular";
+  font-family: "Montserrat-Regular", $defaultFont;
 }
 .spinner {
   position: fixed;

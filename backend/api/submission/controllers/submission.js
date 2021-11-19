@@ -2,7 +2,6 @@
 
 module.exports = {
   create: async (ctx) => {
-    console.log(ctx.request.body);
     var data = ctx.request.body;
     var questions = data.questions;
     var lowerEstimate = 0;

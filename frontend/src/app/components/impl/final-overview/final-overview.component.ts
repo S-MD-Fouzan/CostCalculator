@@ -100,7 +100,6 @@ export class FinalOverviewComponent implements OnInit {
         .catch((error: HttpErrorResponse) => {
           this.costSpinner = false;
           this.error = true;
-          console.log(error);
         });
     }
   }

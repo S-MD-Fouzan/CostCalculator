@@ -2,9 +2,9 @@
 
 .subText {
   color: $pure-black;
-  font-family: "Montserrat-Regular";
+  font-family: "Montserrat-Regular", $defaultFont;
 }
 .heading {
   color: $primary;
-  font-family: "Montserrat-Regular";
+  font-family: "Montserrat-Regular", $defaultFont;
 }

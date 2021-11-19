@@ -6,13 +6,13 @@
 }
 .text {
   color: $secondary;
-  font-family: "Montserrat-Regular";
+  font-family: "Montserrat-Regular", $defaultFont;
 }
 .chips {
   color: $secondary;
 }
 .textFont {
-  font-family: "Montserrat-Light";
+  font-family: "Montserrat-Light", $defaultFont;
 }
 .ifTrue {
   background-color: $primary-light;

@@ -7,18 +7,18 @@
   background-color: $primary;
 }
 .text {
-  font-family: "Montserrat-Regular";
+  font-family: "Montserrat-Regular", $defaultFont;
 }
 .addFont {
-  font-family: "Montserrat-Light";
+  font-family: "Montserrat-Light", $defaultFont;
 }
 .titleText {
   color: $pure-black;
-  font-family: "Montserrat-Regular";
+  font-family: "Montserrat-Regular", $defaultFont;
 }
 .content {
   color: $pure-black;
-  font-family: "Montserrat-Light";
+  font-family: "Montserrat-Light", $defaultFont;
 }
 .cardColoring {
   background-color: $secondary-light;

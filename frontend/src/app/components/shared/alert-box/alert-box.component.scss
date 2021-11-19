@@ -1,13 +1,13 @@
 @import "../../../../styles/general-styles.scss";
 .fontDisplay {
-  font-family: "Montserrat-Regular";
+  font-family: "Montserrat-Regular", $defaultFont;
 }
 .cancel {
   min-height: 64px;
   min-width: 160px;
   background-color: $secondary-light;
   color: $secondary;
-  font-family: "Montserrat-Light";
+  font-family: "Montserrat-Light", $defaultFont;
   font-weight: 600;
 }
 .cancel:hover {
@@ -27,7 +27,7 @@
   min-width: 160px;
   background-color: $primary;
   color: $secondary-light;
-  font-family: "Montserrat-Light";
+  font-family: "Montserrat-Light", $defaultFont;
   white-space: pre-wrap !important;
   font-weight: 600;
 }
