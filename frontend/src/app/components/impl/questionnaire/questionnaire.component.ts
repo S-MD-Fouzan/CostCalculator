@@ -15,7 +15,7 @@ export class QuestionnaireComponent implements OnInit {
   indexOfSectionFromParent: number;
 
   @Output()
-  public atSummary = new EventEmitter<String>();
+  public atSummary = new EventEmitter<string>();
   currentSection: Section;
   summary: boolean;
   @Output()
@@ -37,9 +37,10 @@ export class QuestionnaireComponent implements OnInit {
       0
     );
   }
-  
+
   nextIsClicked($event: number): void {
-    this.widthsArray[this.indexOfSectionFromParent] =(this.index+1)*this.WidthIncrement;
+    this.widthsArray[this.indexOfSectionFromParent] =
+      (this.index + 1) * this.WidthIncrement;
     this.adjustWidth.emit(this.widthsArray[this.indexOfSectionFromParent]);
     var QLength = this.sectionService.getQuestionsLength(
       this.indexOfSectionFromParent
@@ -55,5 +56,4 @@ export class QuestionnaireComponent implements OnInit {
   prevIsClicked($event: number): void {
     this.index = $event - 1;
   }
-
 }

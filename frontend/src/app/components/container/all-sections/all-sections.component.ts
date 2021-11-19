@@ -1,5 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import {
+  StepperSelectionEvent,
+  STEPPER_GLOBAL_OPTIONS,
+} from '@angular/cdk/stepper';
 import { SectionService } from '../../../services/section.service';
 import { Section } from '../../../models/section.model';
 import { MatStepper } from '@angular/material/stepper';
@@ -19,10 +22,10 @@ import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
     {
       provide: MAT_TOOLTIP_DEFAULT_OPTIONS,
       useValue: {
-        position : 'above'  
-      }
-    }
-  ]
+        position: 'above',
+      },
+    },
+  ],
 })
 export class AllSectionsComponent implements OnInit {
   length: number;
@@ -35,14 +38,17 @@ export class AllSectionsComponent implements OnInit {
   sectionsWithAnswers: Section[];
   selectedIndex: number;
   indices: number[];
-  cardStringControl: string = "";
-  skipStringControl: string = "";
+  cardStringControl: string = '';
+  skipStringControl: string = '';
   costDisplayer: boolean;
 
-  constructor(private sectionService: SectionService,private dialog: MatDialog) {}
-  
-  @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
-    if(this.sectionService.refreshHandler){
+  constructor(
+    private sectionService: SectionService,
+    private dialog: MatDialog
+  ) {}
+
+  @HostListener('window:beforeunload', ['$event']) unloadHandler(event: Event) {
+    if (this.sectionService.refreshHandler) {
       event.returnValue = false;
     }
   }
@@ -53,80 +59,99 @@ export class AllSectionsComponent implements OnInit {
     this.final = true;
     this.nextDisabled = true;
     this.hide = false;
-    this.sections=this.sectionService.getSections();
+    this.sections = this.sectionService.getSections();
     this.widthsArray = this.sectionService.widthsArray;
     this.sectionColoring = this.sectionService.sectionColoring;
-    this.cardStringControl=this.sectionService.cardStringControlArray[0];
-    this.skipStringControl=this.sectionService.skipStringControlArray[0];
-    this.length = this.sections.length+1;
-    this.sectionsWithAnswers=this.sectionService.getSectionsWithAnswers();
+    this.cardStringControl = this.sectionService.cardStringControlArray[0];
+    this.skipStringControl = this.sectionService.skipStringControlArray[0];
+    this.length = this.sections.length + 1;
+    this.sectionsWithAnswers = this.sectionService.getSectionsWithAnswers();
   }
 
-  sectionChange(index:number):void {
-    if(this.widthsArray[index]>0){
-      this.sectionService.cardStringControlArray[index]='Edit Section';
-      this.cardStringControl=this.sectionService.cardStringControlArray[index];
-      this.sectionService.skipStringControlArray[index]='Clear';
-      this.skipStringControl=this.sectionService.skipStringControlArray[index];
-    }else{
-      this.sectionService.cardStringControlArray[index]='Get Started';
-      this.cardStringControl=this.sectionService.cardStringControlArray[index];
-      this.sectionService.skipStringControlArray[index]='Skip';
-      this.skipStringControl=this.sectionService.skipStringControlArray[index];
+  sectionChange(index: number): void {
+    if (this.widthsArray[index] > 0) {
+      this.sectionService.cardStringControlArray[index] = 'Edit Section';
+      this.cardStringControl =
+        this.sectionService.cardStringControlArray[index];
+      this.sectionService.skipStringControlArray[index] = 'Clear';
+      this.skipStringControl =
+        this.sectionService.skipStringControlArray[index];
+    } else {
+      this.sectionService.cardStringControlArray[index] = 'Get Started';
+      this.cardStringControl =
+        this.sectionService.cardStringControlArray[index];
+      this.sectionService.skipStringControlArray[index] = 'Skip';
+      this.skipStringControl =
+        this.sectionService.skipStringControlArray[index];
     }
-    if(this.widthsArray[this.selectedIndex]>99){
-      this.sectionColoring[this.selectedIndex]=true;
-    }else{
-      this.sectionColoring[this.selectedIndex]=false;
+    if (this.widthsArray[this.selectedIndex] > 99) {
+      this.sectionColoring[this.selectedIndex] = true;
+    } else {
+      this.sectionColoring[this.selectedIndex] = false;
     }
-    this.selectedIndex=index;
+    this.selectedIndex = index;
   }
-  buttonToggler($event: any):void {
+  buttonToggler($event: string): void {
     if ($event == 'true') {
       this.nextDisabled = false;
     }
   }
-  adjustingWidth($event: any, index: number):void {
+  adjustingWidth($event: number, index: number): void {
     this.widthsArray[index] = $event;
   }
-  switchIt(stepper: MatStepper,check:boolean):void {
-      if(this.sectionsWithAnswers[stepper.selectedIndex].questions[0].options.length>0 && check==true){
-        const dialogRef = this.dialog.open(AlertBoxComponent);
-        dialogRef.afterClosed().subscribe(result => {
-          if(result){
-            for(let i=0;i<this.sectionsWithAnswers[stepper.selectedIndex].questions.length;i++){
-              this.sectionsWithAnswers[stepper.selectedIndex].questions[i].options=[];
-            }
-            this.widthsArray[stepper.selectedIndex] = 0;
-            this.sectionColoring[stepper.selectedIndex] = true;
-            if(stepper.selectedIndex === this.sectionService.getSectionsLength()-1){
-              this.final = false;
-              this.sectionColoring[this.selectedIndex]=true;
-              this.sectionsWithAnswers = this.sectionService.getSectionsWithAnswers();
-            }
-            else{
-              stepper.next();
-              this.sectionChange(stepper.selectedIndex);
-            }
+  switchIt(stepper: MatStepper, check: boolean): void {
+    if (
+      this.sectionsWithAnswers[stepper.selectedIndex].questions[0].options
+        .length > 0 &&
+      check == true
+    ) {
+      const dialogRef = this.dialog.open(AlertBoxComponent);
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          for (
+            let i = 0;
+            i <
+            this.sectionsWithAnswers[stepper.selectedIndex].questions.length;
+            i++
+          ) {
+            this.sectionsWithAnswers[stepper.selectedIndex].questions[
+              i
+            ].options = [];
           }
-          this.selectedIndex = stepper.selectedIndex;
-        });
-      }
-      else{
-        if(stepper.selectedIndex === this.sectionService.getSectionsLength()-1){
-          this.final = false;
-          this.sectionColoring[this.selectedIndex]=true;
-          this.sectionsWithAnswers = this.sectionService.getSectionsWithAnswers();
+          this.widthsArray[stepper.selectedIndex] = 0;
+          this.sectionColoring[stepper.selectedIndex] = true;
+          if (
+            stepper.selectedIndex ===
+            this.sectionService.getSectionsLength() - 1
+          ) {
+            this.final = false;
+            this.sectionColoring[this.selectedIndex] = true;
+            this.sectionsWithAnswers =
+              this.sectionService.getSectionsWithAnswers();
+          } else {
+            stepper.next();
+            this.sectionChange(stepper.selectedIndex);
+          }
         }
-        else{
+        this.selectedIndex = stepper.selectedIndex;
+      });
+    } else {
+      if (
+        stepper.selectedIndex ===
+        this.sectionService.getSectionsLength() - 1
+      ) {
+        this.final = false;
+        this.sectionColoring[this.selectedIndex] = true;
+        this.sectionsWithAnswers = this.sectionService.getSectionsWithAnswers();
+      } else {
         this.sectionColoring[stepper.selectedIndex] = true;
         stepper.next();
         this.sectionChange(stepper.selectedIndex);
-        this.selectedIndex=stepper.selectedIndex;
-        }
+        this.selectedIndex = stepper.selectedIndex;
       }
+    }
   }
-  OnStep(event: any): void {
+  OnStep(event: StepperSelectionEvent): void {
     this.nextDisabled = true;
     this.hide = false;
     this.selectedIndex = event.selectedIndex;

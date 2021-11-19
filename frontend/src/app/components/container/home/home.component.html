@@ -26,14 +26,13 @@
   <div class="flex flex-col m-3 mt-10" *ngFor="let section of sections">
     <div class="flex flex-row justify-center m-5">
       <div>
-        <i
-          class="material-icons h-auto w-auto px-10 py-5 rounded-lg btnHome"
-          >{{ section.icon }}</i
-        >
+        <i class="material-icons h-auto w-auto px-10 py-5 rounded-lg btnHome">{{
+          section.icon
+        }}</i>
       </div>
       <div class="pl-8 flex-initial">
         <h1 class="heading Montserrat-Regular text-2xl">
-          <b>{{ section.stepLabel }}</b>
+          <b>{{ section.name }}</b>
         </h1>
         <p class="banner pt-5 max-w-2xl text-xl">
           {{ section.content }}
