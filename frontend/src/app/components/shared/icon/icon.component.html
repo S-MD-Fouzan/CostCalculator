@@ -1,0 +1,20 @@
+<div
+  [ngClass]="
+    widthValue > 99 && sectionColoringValue == true
+      ? 'contentTrue'
+      : i == selectedIndex
+      ? 'contentTrue'
+      : 'contentFalse'
+  "
+  class="w-10 h-10 rounded-full text-lg flex items-center"
+  #tooltip="matTooltip"
+  [matTooltip]="
+    selectedIndex !== i && selectedIndex + 1 !== i ? sectionName : ''
+  "
+  matTooltipClass="toolTipStyle"
+  (click)="onClick()"
+>
+  <span class="text-center w-full cursor-pointer">
+    <mat-icon class="py-2">{{ sectionIcon }}</mat-icon>
+  </span>
+</div>

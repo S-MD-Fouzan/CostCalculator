@@ -29,6 +29,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FinalOverviewComponent } from './components/impl/final-overview/final-overview.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { QuestionOverviewComponent } from './components/shared/question-overview/question-overview.component';
+import { ButtonComponent } from './components/shared/button/button.component';
+import { SectionPreviewCardComponent } from './components/impl/section-preview-card/section-preview-card.component';
+import { IconComponent } from './components/shared/icon/icon.component';
 
 
 @NgModule({
@@ -41,6 +45,10 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     QuestionComponent,
     AlertBoxComponent,
     FinalOverviewComponent,
+    QuestionOverviewComponent,
+    ButtonComponent,
+    SectionPreviewCardComponent,
+    IconComponent,
   ],
   imports: [
     BrowserModule,

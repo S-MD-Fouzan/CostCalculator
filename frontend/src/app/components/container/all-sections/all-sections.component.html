@@ -1,8 +1,5 @@
 <div class="addFont">
-  <div
-    *ngIf="final"
-    class="w-full h-full flex flex-col justify-center py-10"
-  >
+  <div *ngIf="final" class="w-full h-full flex flex-col justify-center py-10">
     <div class="flex flex-row justify-center my-4 pb-4">
       <div
         class="flex flex-row pb-3 gap-3"
@@ -13,28 +10,15 @@
         }"
       >
         <div class="flex flex-col w-10 items-center ml-3">
-          <div
-            [ngClass]="
-              widthsArray[i] > 99 && sectionColoring[i] == true
-                ? 'contentTrue'
-                : i == selectedIndex
-                ? 'contentTrue'
-                : 'contentFalse'
-            "
-            class="w-10 h-10 rounded-full text-lg flex items-center"
-            #tooltip="matTooltip"
-            [matTooltip]="
-              selectedIndex !== i && selectedIndex + 1 !== i
-                ? section.stepLabel
-                : ''
-            "
-            matTooltipClass="toolTipStyle"
-            (click)="sectionChange(i)"
-          >
-            <span class="text-center w-full cursor-pointer">
-              <mat-icon class="py-2">{{ section.icon }}</mat-icon>
-            </span>
-          </div>
+          <app-icon
+            [i]="i"
+            [selectedIndex]="selectedIndex"
+            [widthValue]="widthsArray[i]"
+            [sectionColoringValue]="sectionColoring[i]"
+            [sectionIcon]="section.icon"
+            [sectionName]="section.stepLabel"
+            (sectionChange)="sectionChange($event)"
+          ></app-icon>
           <div
             class="flex-1 py-2 text-center"
             [ngClass]="{
@@ -88,32 +72,41 @@
           </div>
         </div>
       </div>
-      <div class="flex flex-col w-10 items-center ml-3"  [ngClass]="{
-        classChange: selectedIndex !== length - 2,
-        widthChange: selectedIndex === length - 2
-      }">
-        <div
-          class="
-            w-10
-            h-10
-            rounded-full
-            text-lg text-white
-            flex
-            items-center
-          "
+      <div
+        class="flex flex-col w-10 items-center ml-3"
+        [ngClass]="{
+          classChange: selectedIndex !== length - 2,
+          widthChange: selectedIndex === length - 2
+        }"
+      >
+        <!-- <div
+          class="w-10 h-10 rounded-full text-lg text-white flex items-center"
           [ngClass]="
-              widthsArray[length-2] > 99
-                ? 'contentTrue'
-                : 'contentFalse'
-            "
+            widthsArray[length - 2] > 99 ? 'contentTrue' : 'contentFalse'
+          "
         >
-          <span class="text-center w-full" 
+          <span class="text-center w-full"
             ><mat-icon class="py-2">check_circle_outline</mat-icon></span
           >
+        </div> -->
+        <app-icon
+          [i]="-5"
+          [selectedIndex]="-1"
+          [widthValue]="widthsArray[length - 2]"
+          [sectionColoringValue]="true"
+          [sectionIcon]="'check_circle_outline'"
+          [sectionName]="''"
+          (sectionChange)="sectionChange($event)"
+        ></app-icon>
+        <div
+          class="flex-1 py-2"
+          [ngClass]="{
+            progressBarDisable:
+              selectedIndex !== length - 1 && selectedIndex + 1 !== length - 1
+          }"
+        >
+          Finished
         </div>
-        <div class="flex-1 py-2" [ngClass]="{
-          progressBarDisable: selectedIndex !== length-1 && selectedIndex + 1 !== length-1
-        }">Finished</div>
       </div>
     </div>
     <div class="py-10">
@@ -125,69 +118,34 @@
       >
         <mat-step *ngFor="let section of sections; let i = index">
           <div class="w-full h-full flex flex-col justify-center">
-          <div
-            *ngIf="!hide"
-            class="flex flex-col flex-wrap justify-center items-center"
-          >
-            <mat-card
-              class="
-                flex flex-col flex-wrap
-                sm:w-4/5
-                md:w-3/5
-                lg:w-2/5
-                cardColoring
-              "
+            <div *ngIf="!hide" class="flex flex-col flex-wrap justify-center">
+              <app-section-preview-card
+                (onStart)="ToHide()"
+                (onSkip)="onSkipHandler($event, stepper)"
+                [sectionName]="section.name"
+                [sectionContent]="section.content"
+                [cardStringControl]="cardStringControl"
+                [skipStringControl]="skipStringControl"
+              ></app-section-preview-card>
+            </div>
+            <div *ngIf="hide" class="flex flex-col justify-center">
+              <app-questionnaire
+                [indexOfSectionFromParent]="i"
+                (atSummary)="buttonToggler($event)"
+                (adjustWidth)="adjustingWidth($event, i)"
+              ></app-questionnaire>
+            </div>
+            <div
+              class="flex flex-row flex-wrap justify-end mt-5 w-4/5 self-center"
             >
-              <mat-card-title class="text-2xl titleText">{{
-                section.name
-              }}</mat-card-title>
-              <mat-card-content>
-                <p class="text-lg content">
-                  {{ section.content }}
-                </p>
-              </mat-card-content>
-              <mat-card-actions class="pl-2">
-                <div class="flex flex-row flex-wrap md:space-x-2 lg:space-x-2">
-                  <button
-                    (click)="ToHide()"
-                    class="text-lg py-2 px-4 rounded-lg nextButton"
-                  >
-                    {{ cardStringControl }}
-                  </button>
-                  <button
-                    (click)="switchIt(stepper, true)"
-                    class="text-lg py-2 px-4 rounded-lg SkipButton"
-                  >
-                    {{ skipStringControl }} {{ section.stepLabel }}
-                  </button>
-                </div>
-              </mat-card-actions>
-            </mat-card>
-          </div>
-          <div *ngIf="hide" class="flex flex-col space-y-5">
-            <app-questionnaire
-              [indexOfSectionFromParent]="i"
-              (atSummary)="buttonToggler($event)"
-              (adjustWidth)="adjustingWidth($event, i)"
-            ></app-questionnaire>
-          </div>
-          <div
-            class="
-              flex flex-row flex-wrap
-              justify-end
-              mt-5
-              w-4/5
-              self-center          
-            "
-          >
-            <button
-              *ngIf="!nextDisabled"
-              (click)="switchIt(stepper, false)"
-              class="text-lg py-2 px-4 rounded-lg nextButton"
-            >
-              Next
-            </button>
-          </div>
+              <button
+                *ngIf="!nextDisabled"
+                (click)="switchIt(stepper, false)"
+                class="text-lg py-2 px-4 rounded-lg nextButton"
+              >
+                Next
+              </button>
+            </div>
           </div>
         </mat-step>
       </mat-stepper>

@@ -69,27 +69,29 @@ export class AllSectionsComponent implements OnInit {
   }
 
   sectionChange(index: number): void {
-    if (this.widthsArray[index] > 0) {
-      this.sectionService.cardStringControlArray[index] = 'Edit Section';
-      this.cardStringControl =
-        this.sectionService.cardStringControlArray[index];
-      this.sectionService.skipStringControlArray[index] = 'Clear';
-      this.skipStringControl =
-        this.sectionService.skipStringControlArray[index];
-    } else {
-      this.sectionService.cardStringControlArray[index] = 'Get Started';
-      this.cardStringControl =
-        this.sectionService.cardStringControlArray[index];
-      this.sectionService.skipStringControlArray[index] = 'Skip';
-      this.skipStringControl =
-        this.sectionService.skipStringControlArray[index];
+    if (index > -1) {
+      if (this.widthsArray[index] > 0) {
+        this.sectionService.cardStringControlArray[index] = 'Edit Section';
+        this.cardStringControl =
+          this.sectionService.cardStringControlArray[index];
+        this.sectionService.skipStringControlArray[index] = 'Clear';
+        this.skipStringControl =
+          this.sectionService.skipStringControlArray[index];
+      } else {
+        this.sectionService.cardStringControlArray[index] = 'Get Started';
+        this.cardStringControl =
+          this.sectionService.cardStringControlArray[index];
+        this.sectionService.skipStringControlArray[index] = 'Skip';
+        this.skipStringControl =
+          this.sectionService.skipStringControlArray[index];
+      }
+      if (this.widthsArray[this.selectedIndex] > 99) {
+        this.sectionColoring[this.selectedIndex] = true;
+      } else {
+        this.sectionColoring[this.selectedIndex] = false;
+      }
+      this.selectedIndex = index;
     }
-    if (this.widthsArray[this.selectedIndex] > 99) {
-      this.sectionColoring[this.selectedIndex] = true;
-    } else {
-      this.sectionColoring[this.selectedIndex] = false;
-    }
-    this.selectedIndex = index;
   }
   buttonToggler($event: string): void {
     if ($event == 'true') {
@@ -158,5 +160,8 @@ export class AllSectionsComponent implements OnInit {
   }
   ToHide(): void {
     this.hide = true;
+  }
+  onSkipHandler(event: boolean, stepper: MatStepper): void {
+    this.switchIt(stepper, event);
   }
 }

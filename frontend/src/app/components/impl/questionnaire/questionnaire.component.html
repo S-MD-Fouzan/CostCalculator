@@ -19,7 +19,11 @@
             {{ currentSection.name }}
           </h1>
         </div>
-        <app-summary [indexOfSection]="indexOfSectionFromParent"></app-summary>
+        <div class="w-full h-full">
+          <app-summary
+            [indexOfSection]="indexOfSectionFromParent"
+          ></app-summary>
+        </div>
       </div>
     </div>
   </div>

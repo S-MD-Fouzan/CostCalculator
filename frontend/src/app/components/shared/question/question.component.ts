@@ -67,7 +67,7 @@ export class QuestionComponent implements OnInit {
       this.selected = -1;
     }
   }
-  
+
   ngOnChanges(changes: SimpleChanges) {
     this.questionToAppendAnswers =
       this.sectionService.getQuestionToAppendAnswers(
@@ -92,13 +92,16 @@ export class QuestionComponent implements OnInit {
     }
   }
 
-  onClick(otherChip: MatChip):void{
+  onClick(otherChip: MatChip): void {
     otherChip.toggleSelected(true);
   }
 
   onNext(): void {
     if (this.currentQuestion.multiple_allowed == true) {
-      if (this.answersFormControl.value == null || this.answersFormControl.value.length == 0) {
+      if (
+        this.answersFormControl.value == null ||
+        this.answersFormControl.value.length == 0
+      ) {
         this._snackBar.open('Please select any option!', '', {
           verticalPosition: 'bottom',
           horizontalPosition: 'right',
@@ -107,7 +110,11 @@ export class QuestionComponent implements OnInit {
         });
       } else {
         this.questionToAppendAnswers.options = this.answersFormControl.value;
-        this.sectionService.setAnswers(this.indexOfSection,this.indexOfQuestion,this.answersFormControl.value);
+        this.sectionService.setAnswers(
+          this.indexOfSection,
+          this.indexOfQuestion,
+          this.answersFormControl.value
+        );
         this.answersFormControl.reset();
         this.previous = true;
         this.inNext.emit(this.indexOfQuestion);
@@ -133,9 +140,19 @@ export class QuestionComponent implements OnInit {
       this.previous = false;
     }
   }
-  
-  onClicked(i: number, option: Option):void{
-    this.sectionService.setAnswers(this.indexOfSection,this.indexOfQuestion,[option]);
+
+  onClicked(i: number, option: Option): void {
+    this.sectionService.setAnswers(this.indexOfSection, this.indexOfQuestion, [
+      option,
+    ]);
     this.selected = i;
+  }
+
+  buttonEventHandler(event: string): void {
+    if (event == 'previous') {
+      this.onPrev();
+    } else {
+      this.onNext();
+    }
   }
 }

@@ -58,17 +58,10 @@
       </mat-chip-list>
     </div>
   </div>
-
-  <div class="flex flex-row flex-wrap justify-end gap-5 lg:w-4/5 md:w-4/5">
-    <button
-      class="previousButton text-lg py-2 px-4 rounded-lg"
-      *ngIf="previous"
-      (click)="onPrev()"
-    >
-      Prev
-    </button>
-    <button class="nextButton text-lg py-2 px-4 rounded-lg" (click)="onNext()">
-      Next
-    </button>
+  <div class="flex flex-row flex-wrap justify-end lg:w-4/5 md:w-4/5">
+    <app-button
+      [previous]="previous"
+      (onClicked)="buttonEventHandler($event)"
+    ></app-button>
   </div>
 </div>
