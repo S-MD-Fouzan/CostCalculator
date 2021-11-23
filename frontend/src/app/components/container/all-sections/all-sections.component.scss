@@ -3,50 +3,9 @@
   display: none;
 }
 
-.addColor {
-  background-color: $primary;
-}
 .text {
   font-family: "Montserrat-Regular", $defaultFont;
 }
 .addFont {
   font-family: "Montserrat-Light", $defaultFont;
-}
-.isTrue {
-  background-color: $primary;
-  color: $secondary-light;
-}
-.isFalse {
-  background-color: $secondary-light;
-  color: $secondary;
-}
-.contentTrue {
-  background-color: $primary;
-  color: $secondary-light;
-}
-.contentFalse {
-  background-color: $secondary-light;
-  color: $secondary;
-}
-@media screen and (min-width: 1024px) {
-  .progressBarDisable {
-    display: none;
-  }
-}
-
-@media screen and (min-width: 720px) and (max-width: 1024px) {
-  .progressBarDisable {
-    display: none;
-  }
-}
-@media screen and (min-width: 540px) and (max-width: 720px) {
-  .classChange {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 540px) {
-  .classChange {
-    display: none;
-  }
 }

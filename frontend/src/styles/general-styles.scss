@@ -56,3 +56,25 @@ body {
   white-space: pre-wrap !important;
   font-weight: 600;
 }
+@media screen and (min-width: 1024px) {
+  .progressBarDisable {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 720px) and (max-width: 1024px) {
+  .progressBarDisable {
+    display: none;
+  }
+}
+@media screen and (min-width: 540px) and (max-width: 720px) {
+  .classChange {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .classChange {
+    display: none;
+  }
+}
