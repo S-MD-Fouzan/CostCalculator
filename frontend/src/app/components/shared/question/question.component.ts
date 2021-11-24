@@ -10,7 +10,6 @@ import { Question } from '../../../models/question.model';
 import { Option } from '../../../models/question.model';
 import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SectionService } from '../../../services/section.service';
 import { MatChip } from '@angular/material/chips';
 
 @Component({
@@ -20,40 +19,29 @@ import { MatChip } from '@angular/material/chips';
 })
 export class QuestionComponent implements OnInit {
   @Input()
-  indexOfSection: number;
+  currentQuestion: Question;
   @Input()
-  indexOfQuestion: number;
-
+  questionToAppendAnswers: Question;
+  @Input()
+  indexOfQuestion:number;
   @Output()
   public inNext = new EventEmitter<number>();
   @Output()
   public inPrev = new EventEmitter<number>();
 
   answersFormControl = new FormControl();
-  questionToAppendAnswers: Question;
-  currentQuestion: Question;
   currentOptions: Option[];
   previous: boolean;
   selectedOptions: Option[];
   selected: number;
 
   constructor(
-    private _snackBar: MatSnackBar,
-    private sectionService: SectionService
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    this.questionToAppendAnswers =
-      this.sectionService.getQuestionToAppendAnswers(
-        this.indexOfSection,
-        this.indexOfQuestion
-      );
     this.selectedOptions = [];
     this.previous = false;
-    this.currentQuestion = this.sectionService.getQuestion(
-      this.indexOfSection,
-      this.indexOfQuestion
-    );
     this.currentOptions = this.currentQuestion.options;
     if (this.questionToAppendAnswers.options.length > 0) {
       if (this.currentQuestion.multiple_allowed == true) {
@@ -69,15 +57,6 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.questionToAppendAnswers =
-      this.sectionService.getQuestionToAppendAnswers(
-        this.indexOfSection,
-        this.indexOfQuestion
-      );
-    this.currentQuestion = this.sectionService.getQuestion(
-      this.indexOfSection,
-      this.indexOfQuestion
-    );
     this.currentOptions = this.currentQuestion.options;
     if (this.questionToAppendAnswers.options.length > 0) {
       if (this.currentQuestion.multiple_allowed == true) {
@@ -110,11 +89,6 @@ export class QuestionComponent implements OnInit {
         });
       } else {
         this.questionToAppendAnswers.options = this.answersFormControl.value;
-        this.sectionService.setAnswers(
-          this.indexOfSection,
-          this.indexOfQuestion,
-          this.answersFormControl.value
-        );
         this.answersFormControl.reset();
         this.previous = true;
         this.inNext.emit(this.indexOfQuestion);
@@ -142,9 +116,7 @@ export class QuestionComponent implements OnInit {
   }
 
   onClicked(i: number, option: Option): void {
-    this.sectionService.setAnswers(this.indexOfSection, this.indexOfQuestion, [
-      option,
-    ]);
+    this.questionToAppendAnswers.options=[option];
     this.selected = i;
   }
 

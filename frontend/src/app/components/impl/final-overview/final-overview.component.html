@@ -101,7 +101,9 @@
               {{ section.name }}
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <app-summary [indexOfSection]="indices[i]"></app-summary>
+         <app-summary
+            [questionsWithSelectedOptions]="section.questions"
+          ></app-summary>
           <mat-action-row
             class="flex flex-row flex-wrap gap-2 justify-end mr-5"
             *ngIf="filledSectionsArray.length !== 1"

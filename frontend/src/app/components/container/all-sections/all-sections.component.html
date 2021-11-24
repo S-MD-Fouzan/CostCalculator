@@ -29,7 +29,8 @@
             </div>
             <div *ngIf="hide" class="flex flex-col justify-center">
               <app-questionnaire
-                [indexOfSectionFromParent]="i"
+                [currentSection]="section"
+                [currentSectionWithoutOptions]="sectionsWithAnswers[i]"
                 (atSummary)="buttonToggler($event)"
                 (adjustWidth)="adjustingWidth($event, i)"
               ></app-questionnaire>
