@@ -1,128 +1,37 @@
-<div class="summary space-y-5 sm:pl-5 sm:pr-5">
-  <div
-    *ngIf="isEmpty"
-    class="w-full h-full flex justify-center text-2xl mt-14 text"
+<mat-accordion>
+  <mat-expansion-panel
+    *ngFor="let section of filledSectionsArray; let i = index"
+    [expanded]="step === i"
+    (opened)="setStep(i)"
+    hideToggle
   >
-    <h1>You haven't answered any of the questions.</h1>
-  </div>
-  <div
-    *ngIf="!isEmpty"
-    class="w-full h-full flex flex-col justify-center items-center"
-  >
-    <div
-      *ngIf="costSpinner"
-      class="
-        h-screen
-        flex flex-col
-        justify-center
-        items-center
-        w-screen
-        spinner
-      "
+    <mat-expansion-panel-header>
+      <mat-panel-title
+        class="text-2xl text"
+        [style.color]="step == i ? '#15a811' : '#000000'"
+      >
+        {{ section.name }}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-summary
+      [questionsWithSelectedOptions]="section.questions"
+    ></app-summary>
+    <mat-action-row
+      class="flex flex-row flex-wrap gap-2 justify-end mr-5"
+      *ngIf="filledSectionsArray.length !== 1"
     >
-      <diV class="flex flex-col justify-center items-center">
-        <div><mat-spinner></mat-spinner></div>
-        <div class="pt-5 text-2xl"><h1>Loading....</h1></div>
-      </diV>
-    </div>
-    <div *ngIf="error" class="h-screen w-screen flex flex-col justify-center">
-      <h1 class="text-4xl text-center">Error 500 : Internal Server Error</h1>
-    </div>
-    <div *ngIf="!error" class="flex flex-col items-center w-full h-full">
-      <div class="w-11/12 h-full mt-5">
-      <div
-        *ngIf="!costDisplayer"
-        class="flex flex-col justify-center items-center space-y-5"
+      <button
+        (click)="prevStep()"
+        class="text-lg py-2 px-4 rounded-lg previousButton"
       >
-        <h1 class="text-4xl text-black text-center text">
-          Here's the estimate of your project
-        </h1>
-        <h1 class="text-3xl text-black text-center text">
-          ${{ minPrice }} - ${{ maxPrice }}
-        </h1>
-      </div>
-      <div
-        *ngIf="costDisplayer"
-        class="flex flex-col flex-wrap justify-center items-center gap-5"
+        Previous
+      </button>
+      <button
+        (click)="nextStep()"
+        class="text-lg py-2 px-4 rounded-lg nextButton"
       >
-        <h1 class="text-3xl text-black text-center text">
-          Please enter your Email to receive your estimate
-        </h1>
-        <form
-          (ngSubmit)="onSubmit()"
-          class="flex flex-col justify-center items-center"
-        >
-        <div class="flex flex-row flex-wrap justify-center gap-3">
-          <mat-form-field
-            appearance="outline"
-            class="flex flex-col min-h-16 text md:w-96 lg:w-96 sm:w-80"
-          >
-            <mat-label>Email</mat-label>
-            <input
-              type="email"
-              matInput
-              [formControl]="emailFormControl"
-              [errorStateMatcher]="matcher"
-            />
-            <mat-error
-              *ngIf="
-                !emailFormControl.hasError('required') &&
-                emailFormControl.hasError('pattern')
-              "
-            >
-              Please enter a valid email address
-            </mat-error>
-            <mat-error *ngIf="emailFormControl.hasError('required')">
-              Email is required
-            </mat-error>
-          </mat-form-field>
-          <button
-            type="submit"
-            class="text-lg py-2 px-4 h-16 rounded-lg nextButton cursor-pointer"
-          >
-            Submit
-          </button>
-          </div>
-        </form>
-      </div>
-    </div>
-      <mat-accordion class="mt-5 w-11/12">
-        <mat-expansion-panel
-          *ngFor="let section of filledSectionsArray; let i = index"
-          [expanded]="step === i"
-          (opened)="setStep(i)"
-          hideToggle
-        >
-          <mat-expansion-panel-header>
-            <mat-panel-title
-              class="text-2xl text"
-              [style.color]="step == i ? '#15a811' : '#000000'"
-            >
-              {{ section.name }}
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-         <app-summary
-            [questionsWithSelectedOptions]="section.questions"
-          ></app-summary>
-          <mat-action-row
-            class="flex flex-row flex-wrap gap-2 justify-end mr-5"
-            *ngIf="filledSectionsArray.length !== 1"
-          >
-            <button
-              (click)="prevStep()"
-              class="text-lg py-2 px-4 rounded-lg previousButton"
-            >
-              Previous
-            </button>
-            <button
-              (click)="nextStep()"
-              class="text-lg py-2 px-4 rounded-lg nextButton"
-            >
-              Next
-            </button>
-          </mat-action-row>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </div>
-  </div>
-</div>
+        Next
+      </button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

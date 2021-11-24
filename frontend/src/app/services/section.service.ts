@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Section, SectionForHome } from '../models/section.model';
 import { HttpClient } from '@angular/common/http';
-import { Option, Question } from '../models/question.model';
+import { Question } from '../models/question.model';
 import { environment } from '../../environments/environment';
 import { Submission } from '../models/submission.model';
 
@@ -11,7 +11,6 @@ import { Submission } from '../models/submission.model';
 export class SectionService {
   url: string = environment.API_URL;
   miniSections: SectionForHome[];
-  indices: number[];
   sections: Section[] = [];
   widthsArray: number[] = [];
   sectionColoring: boolean[] = [];
@@ -83,33 +82,14 @@ export class SectionService {
         );
     });
   }
-  getQuestionToAppendAnswers(
-    indexOfSection: number,
-    indexOfQuestion: number
-  ): Question {
-    return this.sectionsWithoutOptions[indexOfSection].questions[
-      indexOfQuestion
-    ];
-  }
-  getQuestion(indexOfSection: number, indexOfQuestion: number): Question {
-    return this.sections[indexOfSection].questions[indexOfQuestion];
-  }
-  getQuestionsLength(indexOfSection: number): number {
-    return this.sections[indexOfSection].questions.length;
-  }
   getFilledSections(): Section[] {
-    this.indices = [];
     let filledSections: Section[] = [];
     for (let i = 0; i < this.sectionsWithoutOptions.length; i++) {
       if (this.sectionsWithoutOptions[i].questions[0].options.length > 0) {
         filledSections.push(this.sectionsWithoutOptions[i]);
-        this.indices.push(i);
       }
     }
     return filledSections;
-  }
-  getIndices(): number[] {
-    return this.indices;
   }
   getSectionsForHomeComponent(): SectionForHome[] {
     this.miniSections = [];
@@ -121,14 +101,5 @@ export class SectionService {
       });
     });
     return this.miniSections;
-  }
-  setAnswers(
-    sectionIndex: number,
-    questionIndex: number,
-    answers: Option[]
-  ): void {
-    this.refreshHandler = true;
-    this.sectionsWithoutOptions[sectionIndex].questions[questionIndex].options =
-      answers;
   }
 }

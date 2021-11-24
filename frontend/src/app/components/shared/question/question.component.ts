@@ -23,7 +23,7 @@ export class QuestionComponent implements OnInit {
   @Input()
   questionToAppendAnswers: Question;
   @Input()
-  indexOfQuestion:number;
+  indexOfQuestion: number;
   @Output()
   public inNext = new EventEmitter<number>();
   @Output()
@@ -35,9 +35,7 @@ export class QuestionComponent implements OnInit {
   selectedOptions: Option[];
   selected: number;
 
-  constructor(
-    private _snackBar: MatSnackBar
-  ) {}
+  constructor(private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.selectedOptions = [];
@@ -116,7 +114,7 @@ export class QuestionComponent implements OnInit {
   }
 
   onClicked(i: number, option: Option): void {
-    this.questionToAppendAnswers.options=[option];
+    this.questionToAppendAnswers.options = [option];
     this.selected = i;
   }
 

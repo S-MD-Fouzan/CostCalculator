@@ -13,15 +13,15 @@ export class QuestionnaireComponent implements OnInit {
   @Input()
   currentSection: Section;
   @Input()
-  currentSectionWithoutOptions:Section;
+  currentSectionWithoutOptions: Section;
   @Output()
   public atSummary = new EventEmitter<string>();
   summary: boolean;
   @Output()
   public adjustWidth = new EventEmitter<number>();
-  width:number;
-  currentQuestion:Question;
-  currentQuestionWithoutOptions:Question;
+  width: number;
+  currentQuestion: Question;
+  currentQuestionWithoutOptions: Question;
 
   constructor() {}
 
@@ -29,14 +29,14 @@ export class QuestionnaireComponent implements OnInit {
     this.index = 0;
     this.summary = false;
     this.WidthIncrement = 100 / this.currentSection.questions.length;
-    this.width=0;
-    this.currentQuestion=this.currentSection.questions[this.index];
-    this.currentQuestionWithoutOptions=this.currentSectionWithoutOptions.questions[this.index];
+    this.width = 0;
+    this.currentQuestion = this.currentSection.questions[this.index];
+    this.currentQuestionWithoutOptions =
+      this.currentSectionWithoutOptions.questions[this.index];
   }
 
   nextIsClicked($event: number): void {
-    this.width =
-      (this.index + 1) * this.WidthIncrement;
+    this.width = (this.index + 1) * this.WidthIncrement;
     this.adjustWidth.emit(this.width);
 
     if (this.index == this.currentSection.questions.length - 1) {
@@ -44,13 +44,15 @@ export class QuestionnaireComponent implements OnInit {
       this.atSummary.emit('true');
     } else {
       this.index = $event + 1;
-      this.currentQuestion=this.currentSection.questions[this.index];
-      this.currentQuestionWithoutOptions=this.currentSectionWithoutOptions.questions[this.index];
+      this.currentQuestion = this.currentSection.questions[this.index];
+      this.currentQuestionWithoutOptions =
+        this.currentSectionWithoutOptions.questions[this.index];
     }
   }
   prevIsClicked($event: number): void {
     this.index = $event - 1;
-    this.currentQuestion=this.currentSection.questions[this.index];
-    this.currentQuestionWithoutOptions=this.currentSectionWithoutOptions.questions[this.index];
+    this.currentQuestion = this.currentSection.questions[this.index];
+    this.currentQuestionWithoutOptions =
+      this.currentSectionWithoutOptions.questions[this.index];
   }
 }
