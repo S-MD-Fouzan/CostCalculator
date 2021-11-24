@@ -34,6 +34,7 @@ import { ButtonComponent } from './components/shared/button/button.component';
 import { SectionPreviewCardComponent } from './components/impl/section-preview-card/section-preview-card.component';
 import { IconComponent } from './components/shared/icon/icon.component';
 import { ProgressBarComponent } from './components/shared/progress-bar/progress-bar.component';
+import { SectionStepperComponent } from './components/impl/section-stepper/section-stepper.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { ProgressBarComponent } from './components/shared/progress-bar/progress-
     SectionPreviewCardComponent,
     IconComponent,
     ProgressBarComponent,
+    SectionStepperComponent,
   ],
   imports: [
     BrowserModule,

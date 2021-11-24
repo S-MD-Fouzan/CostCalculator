@@ -1,0 +1,63 @@
+<div class="flex flex-row justify-center my-4 pb-4">
+  <div
+    class="flex flex-row pb-3 gap-3"
+    *ngFor="let section of sections; let i = index"
+    [ngClass]="{
+      classChange: selectedIndex !== i && selectedIndex + 1 !== i,
+      widthChange: selectedIndex === i || selectedIndex + 1 === i
+    }"
+  >
+    <div class="flex flex-col w-10 items-center ml-3">
+      <app-icon
+        [i]="i"
+        [selectedIndex]="selectedIndex"
+        [widthValue]="widthsArray[i]"
+        [sectionColoringValue]="sectionColoring[i]"
+        [sectionIcon]="section.icon"
+        [sectionName]="section.stepLabel"
+        (sectionChange)="sectionChangeHandler($event)"
+      ></app-icon>
+      <div
+        class="flex-1 py-2 text-center"
+        [ngClass]="{
+          progressBarDisable: selectedIndex !== i && selectedIndex + 1 !== i
+        }"
+      >
+        {{ section.stepLabel }}
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <app-progress-bar
+        [i]="i"
+        [selectedIndex]="selectedIndex"
+        [percentage]="widthsArray[i]"
+      ></app-progress-bar>
+    </div>
+  </div>
+  <div
+    class="flex flex-col w-10 items-center ml-3"
+    [ngClass]="{
+      classChange: selectedIndex !== length - 2,
+      widthChange: selectedIndex === length - 2
+    }"
+  >
+    <app-icon
+      [i]="-5"
+      [selectedIndex]="-1"
+      [widthValue]="widthsArray[length - 2]"
+      [sectionColoringValue]="true"
+      [sectionIcon]="'check_circle_outline'"
+      [sectionName]="''"
+      (sectionChange)="sectionChangeHandler($event)"
+    ></app-icon>
+    <div
+      class="flex-1 py-2"
+      [ngClass]="{
+        progressBarDisable:
+          selectedIndex !== length - 1 && selectedIndex + 1 !== length - 1
+      }"
+    >
+      Finished
+    </div>
+  </div>
+</div>
