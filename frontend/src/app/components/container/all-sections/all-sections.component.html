@@ -2,54 +2,14 @@
   <div *ngIf="final" class="w-full h-full flex flex-col justify-center py-10">
     <app-section-stepper
       [sections]="sections"
-      [selectedIndex]="selectedIndex"
+      [sectionsWithAnswers]="sectionsWithAnswers"
       [widthsArray]="widthsArray"
       [sectionColoring]="sectionColoring"
       [length]="length"
-      (sectionChangeIndex)="sectionChange($event)"
+      [cardStringControlArray]="cardStringControlArray"
+      [skipStringControlArray]="skipStringControlArray"
+      (changeStatus)="changeStatus()"
     ></app-section-stepper>
-    <div class="py-10">
-      <mat-stepper
-        labelPosition="bottom"
-        (selectionChange)="OnStep($event)"
-        [selectedIndex]="selectedIndex"
-        #stepper
-      >
-        <mat-step *ngFor="let section of sections; let i = index">
-          <div class="w-full h-full flex flex-col justify-center">
-            <div *ngIf="!hide" class="flex flex-col flex-wrap justify-center">
-              <app-section-preview-card
-                (onStart)="ToHide()"
-                (onSkip)="onSkipHandler($event, stepper)"
-                [sectionName]="section.name"
-                [sectionContent]="section.content"
-                [cardStringControl]="cardStringControl"
-                [skipStringControl]="skipStringControl"
-              ></app-section-preview-card>
-            </div>
-            <div *ngIf="hide" class="flex flex-col justify-center">
-              <app-questionnaire
-                [currentSection]="section"
-                [currentSectionWithoutOptions]="sectionsWithAnswers[i]"
-                (atSummary)="buttonToggler($event)"
-                (adjustWidth)="adjustingWidth($event, i)"
-              ></app-questionnaire>
-            </div>
-            <div
-              class="flex flex-row flex-wrap justify-end mt-5 w-4/5 self-center"
-            >
-              <button
-                *ngIf="!nextDisabled"
-                (click)="switchIt(stepper, false)"
-                class="text-lg py-2 px-4 rounded-lg nextButton"
-              >
-                Next
-              </button>
-            </div>
-          </div>
-        </mat-step>
-      </mat-stepper>
-    </div>
   </div>
   <div *ngIf="!final">
     <div class="summary space-y-5 sm:pl-5 sm:pr-5">
