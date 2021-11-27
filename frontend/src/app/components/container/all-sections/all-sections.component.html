@@ -8,117 +8,20 @@
       [length]="length"
       [cardStringControlArray]="cardStringControlArray"
       [skipStringControlArray]="skipStringControlArray"
-      (changeStatus)="changeStatus()"
+      (changeStatus)="changeStatus($event)"
     ></app-section-stepper>
   </div>
   <div *ngIf="!final">
-    <div class="summary space-y-5 sm:pl-5 sm:pr-5">
-      <div
-        *ngIf="isEmpty"
-        class="w-full h-full flex justify-center text-2xl mt-14 text"
-      >
-        <h1>You haven't answered any of the questions.</h1>
-      </div>
-      <div
-        *ngIf="!isEmpty"
-        class="w-full h-full flex flex-col justify-center items-center"
-      >
-        <div
-          *ngIf="costSpinner"
-          class="
-            h-screen
-            flex flex-col
-            justify-center
-            items-center
-            w-screen
-            spinner
-          "
-        >
-          <diV class="flex flex-col justify-center items-center">
-            <div><mat-spinner></mat-spinner></div>
-            <div class="pt-5 text-2xl"><h1>Loading....</h1></div>
-          </diV>
-        </div>
-        <div
-          *ngIf="error"
-          class="h-screen w-screen flex flex-col justify-center"
-        >
-          <h1 class="text-4xl text-center">
-            Error 500 : Internal Server Error
-          </h1>
-        </div>
-        <div *ngIf="!error" class="flex flex-col items-center w-full h-full">
-          <div class="w-11/12 h-full mt-5">
-            <div
-              *ngIf="!costDisplayer"
-              class="flex flex-col justify-center items-center space-y-5"
-            >
-              <h1 class="text-4xl text-black text-center text">
-                Here's the estimate of your project
-              </h1>
-              <h1 class="text-3xl text-black text-center text">
-                ${{ minPrice }} - ${{ maxPrice }}
-              </h1>
-            </div>
-            <div
-              *ngIf="costDisplayer"
-              class="flex flex-col flex-wrap justify-center items-center gap-5"
-            >
-              <h1 class="text-3xl text-black text-center text">
-                Please enter your Email to receive your estimate
-              </h1>
-              <form
-                (ngSubmit)="onSubmit()"
-                class="flex flex-col justify-center items-center"
-              >
-                <div class="flex flex-row flex-wrap justify-center gap-3">
-                  <mat-form-field
-                    appearance="outline"
-                    class="flex flex-col min-h-16 text md:w-96 lg:w-96 sm:w-80"
-                  >
-                    <mat-label>Email</mat-label>
-                    <input
-                      type="email"
-                      matInput
-                      [formControl]="emailFormControl"
-                      [errorStateMatcher]="matcher"
-                    />
-                    <mat-error
-                      *ngIf="
-                        !emailFormControl.hasError('required') &&
-                        emailFormControl.hasError('pattern')
-                      "
-                    >
-                      Please enter a valid email address
-                    </mat-error>
-                    <mat-error *ngIf="emailFormControl.hasError('required')">
-                      Email is required
-                    </mat-error>
-                  </mat-form-field>
-                  <button
-                    type="submit"
-                    class="
-                      text-lg
-                      py-2
-                      px-4
-                      h-16
-                      rounded-lg
-                      nextButton
-                      cursor-pointer
-                    "
-                  >
-                    Submit
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-          <app-final-overview
-            [filledSectionsArray]="filledSectionsArray"
-            class="w-11/12 mt-5"
-          ></app-final-overview>
-        </div>
-      </div>
-    </div>
+    <app-final-overview
+      [isEmpty]="isEmpty"
+      [costSpinner]="costSpinner"
+      [error]="error"
+      [costDisplayer]="costDisplayer"
+      [minPrice]="minPrice"
+      [maxPrice]="maxPrice"
+      [filledSectionsArray]="filledSectionsArray"
+      (submission)="onSubmit($event)"
+    >
+    </app-final-overview>
   </div>
 </div>

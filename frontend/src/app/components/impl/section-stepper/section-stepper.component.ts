@@ -32,7 +32,7 @@ export class SectionStepperComponent implements OnInit {
   @Input()
   skipStringControlArray: string[];
   @Output()
-  public changeStatus = new EventEmitter();
+  public changeStatus = new EventEmitter<boolean>();
 
   constructor(private dialog: MatDialog) {}
 
@@ -77,8 +77,8 @@ export class SectionStepperComponent implements OnInit {
           this.widthsArray[stepper.selectedIndex] = 0;
           this.sectionColoring[stepper.selectedIndex] = true;
           if (stepper.selectedIndex === this.length - 1) {
+            this.changeStatus.emit(false);
             this.sectionColoring[this.selectedIndex] = true;
-            this.changeStatus.emit();
           } else {
             stepper.next();
             this.sectionChange(stepper.selectedIndex);
@@ -87,8 +87,8 @@ export class SectionStepperComponent implements OnInit {
       });
     } else {
       if (stepper.selectedIndex === this.length - 1) {
+        this.changeStatus.emit(false);
         this.sectionColoring[this.selectedIndex] = true;
-        this.changeStatus.emit();
       } else {
         this.sectionColoring[stepper.selectedIndex] = true;
         stepper.next();
