@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnChanges, OnInit } from '@angular/core';
 import { SectionService } from '../../../services/section.service';
 import { Section } from '../../../models/section.model';
 import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
@@ -59,14 +59,15 @@ export class AllSectionsComponent implements OnInit {
     this.cardStringControlArray = this.sectionService.cardStringControlArray;
     this.skipStringControlArray = this.sectionService.skipStringControlArray;
   }
+
   changeStatus(event: boolean): void {
-    this.final = event;
     this.filledSectionsArray = this.sectionService.getFilledSections();
     if (this.filledSectionsArray.length == 0) {
       this.isEmpty = true;
     } else {
       this.isEmpty = false;
     }
+    this.final = event;
   }
   onSubmit(finalData: Submission): void {
     this.costSpinner = true;
@@ -82,7 +83,9 @@ export class AllSectionsComponent implements OnInit {
       .catch((error: HttpErrorResponse) => {
         this.costSpinner = false;
         this.error = true;
-        console.log(error);
       });
+  }
+  refreshHandler(): void{
+    this.sectionService.refreshHandler=!this.sectionService.refreshHandler;
   }
 }

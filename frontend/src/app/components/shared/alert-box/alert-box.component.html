@@ -6,22 +6,13 @@
   </h2>
   <div mat-dialog-actions class="flex flex-row justify-end mb-1">
     <div>
-      <button
-        mat-button
-        (click)="close()"
-        class="float-right mr-5 mt-5 rounded-lg cancel"
-      >
-        Cancel
-      </button>
-    </div>
-    <div>
-      <button
-        mat-button
-        class="float-right mr-5 mt-5 rounded-lg ok"
-        (click)="proceed()"
-      >
-        Ok
-      </button>
+      <app-button
+          [previous]="true"
+          [buttonTextOne]="'Cancel'"
+          [buttonTextTwo]="'Ok'"
+          (onClickedOne)="close()"
+          (onClickedTwo)="proceed()"
+        ></app-button>
     </div>
   </div>
 </div>

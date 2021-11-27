@@ -9,18 +9,26 @@ export class ButtonComponent implements OnInit {
   @Input()
   previous: boolean;
 
+  @Input()
+  buttonTextOne: string;
+
+  @Input()
+  buttonTextTwo: string;
+
   @Output()
-  public onClicked = new EventEmitter<string>();
+  public onClickedOne = new EventEmitter();
+
+  @Output()
+  public onClickedTwo = new EventEmitter();
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  onClick(buttonText: string): void {
-    if (buttonText == 'previous') {
-      this.onClicked.emit('previous');
-    } else {
-      this.onClicked.emit('next');
-    }
+  onClickOne(){
+    this.onClickedOne.emit();
+  }
+  onClickTwo(){
+    this.onClickedTwo.emit();
   }
 }

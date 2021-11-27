@@ -28,6 +28,8 @@ export class QuestionComponent implements OnInit {
   public inNext = new EventEmitter<number>();
   @Output()
   public inPrev = new EventEmitter<number>();
+  @Output()
+  public filled = new EventEmitter();
 
   answersFormControl = new FormControl();
   currentOptions: Option[];
@@ -87,6 +89,7 @@ export class QuestionComponent implements OnInit {
         });
       } else {
         this.questionToAppendAnswers.options = this.answersFormControl.value;
+        this.filled.emit();
         this.answersFormControl.reset();
         this.previous = true;
         this.inNext.emit(this.indexOfQuestion);
@@ -101,6 +104,7 @@ export class QuestionComponent implements OnInit {
         });
       } else {
         this.previous = true;
+        this.filled.emit();
         this.inNext.emit(this.indexOfQuestion);
       }
     }
@@ -118,11 +122,4 @@ export class QuestionComponent implements OnInit {
     this.selected = i;
   }
 
-  buttonEventHandler(event: string): void {
-    if (event == 'previous') {
-      this.onPrev();
-    } else {
-      this.onNext();
-    }
-  }
 }

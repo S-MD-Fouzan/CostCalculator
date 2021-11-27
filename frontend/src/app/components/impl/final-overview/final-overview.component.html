@@ -116,18 +116,13 @@
             class="flex flex-row flex-wrap gap-2 justify-end mr-5"
             *ngIf="filledSectionsArray.length !== 1"
           >
-            <button
-              (click)="prevStep()"
-              class="text-lg py-2 px-4 rounded-lg previousButton"
-            >
-              Previous
-            </button>
-            <button
-              (click)="nextStep()"
-              class="text-lg py-2 px-4 rounded-lg nextButton"
-            >
-              Next
-            </button>
+            <app-button
+              [previous]="true"
+              [buttonTextOne]="'Previous'"
+              [buttonTextTwo]="'Next'"
+              (onClickedOne)="prevStep()"
+              (onClickedTwo)="nextStep()"
+            ></app-button>
           </mat-action-row>
         </mat-expansion-panel>
       </mat-accordion>

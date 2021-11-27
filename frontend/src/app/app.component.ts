@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
     this.error=false;
     }
     catch(error){
-       console.log(error);
        this.spinner=false;
        this.error=true;
     }

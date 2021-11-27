@@ -61,7 +61,10 @@
   <div class="flex flex-row flex-wrap justify-end lg:w-4/5 md:w-4/5">
     <app-button
       [previous]="previous"
-      (onClicked)="buttonEventHandler($event)"
+      [buttonTextOne]="'Prev'"
+      [buttonTextTwo]="'Next'"
+      (onClickedOne)="onPrev()"
+      (onClickedTwo)="onNext()"
     ></app-button>
   </div>
 </div>

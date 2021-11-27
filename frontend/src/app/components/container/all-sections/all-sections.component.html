@@ -9,6 +9,7 @@
       [cardStringControlArray]="cardStringControlArray"
       [skipStringControlArray]="skipStringControlArray"
       (changeStatus)="changeStatus($event)"
+      (filled)="refreshHandler()"
     ></app-section-stepper>
   </div>
   <div *ngIf="!final">

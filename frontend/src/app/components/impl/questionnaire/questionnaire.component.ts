@@ -19,6 +19,8 @@ export class QuestionnaireComponent implements OnInit {
   summary: boolean;
   @Output()
   public adjustWidth = new EventEmitter<number>();
+  @Output()
+  public filled = new EventEmitter();
   width: number;
   currentQuestion: Question;
   currentQuestionWithoutOptions: Question;
@@ -54,5 +56,8 @@ export class QuestionnaireComponent implements OnInit {
     this.currentQuestion = this.currentSection.questions[this.index];
     this.currentQuestionWithoutOptions =
       this.currentSectionWithoutOptions.questions[this.index];
+  }
+  refreshHandler(): void{
+    this.filled.emit();
   }
 }

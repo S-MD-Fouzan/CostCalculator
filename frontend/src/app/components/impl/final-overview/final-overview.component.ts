@@ -58,7 +58,6 @@ export class FinalOverviewComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log('In final');
   }
 
   setStep(index: number): void {
