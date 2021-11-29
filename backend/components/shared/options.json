@@ -2,21 +2,27 @@
   "collectionName": "components_shared_options",
   "info": {
     "name": "options",
-    "icon": "ad"
+    "icon": "ad",
+    "description": ""
   },
   "options": {
     "timestamps": false,
-    "privateAttributes":["_id","id","published_at","__v"],
-    "populateCreatorFields":true
+    "privateAttributes": [
+      "_id",
+      "id",
+      "published_at",
+      "__v"
+    ],
+    "populateCreatorFields": true
   },
   "attributes": {
     "text": {
       "type": "string"
     },
-    "min_price": {
+    "minPrice": {
       "type": "integer"
     },
-    "max_price": {
+    "maxPrice": {
       "type": "integer"
     }
   }

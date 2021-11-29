@@ -45,7 +45,7 @@ export class QuestionComponent implements OnInit, OnChanges {
     this.previous = false;
     this.currentOptions = this.currentQuestion.options;
     if (this.questionToAppendAnswers.options.length > 0) {
-      if (this.currentQuestion.multiple_allowed === true) {
+      if (this.currentQuestion.multipleAllowed === true) {
         this.answersFormControl.setValue(this.questionToAppendAnswers.options);
       } else {
         this.selected = this.currentQuestion.options.indexOf(
@@ -60,7 +60,7 @@ export class QuestionComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     this.currentOptions = this.currentQuestion.options;
     if (this.questionToAppendAnswers.options.length > 0) {
-      if (this.currentQuestion.multiple_allowed === true) {
+      if (this.currentQuestion.multipleAllowed === true) {
         this.answersFormControl.setValue(this.questionToAppendAnswers.options);
       } else {
         this.selected = this.currentQuestion.options.indexOf(
@@ -77,7 +77,7 @@ export class QuestionComponent implements OnInit, OnChanges {
   }
 
   onNext(): void {
-    if (this.currentQuestion.multiple_allowed === true) {
+    if (this.currentQuestion.multipleAllowed === true) {
       if (
         this.answersFormControl.value == null ||
         this.answersFormControl.value.length === 0

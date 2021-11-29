@@ -1,7 +1,7 @@
 <div class="summary space-y-5 sm:pl-5 sm:pr-5">
   <div
     *ngIf="isEmpty"
-    class="w-full h-full flex justify-center text-2xl mt-14 text"
+    class="w-full h-full flex justify-center text-2xl mt-14 textRegular"
   >
     <h1>You haven't answered any of the questions.</h1>
   </div>
@@ -34,10 +34,10 @@
           *ngIf="!costDisplayer"
           class="flex flex-col justify-center items-center space-y-5"
         >
-          <h1 class="text-4xl text-black text-center text">
+          <h1 class="text-4xl text-black text-center textRegular">
             Here's the estimate of your project
           </h1>
-          <h1 class="text-3xl text-black text-center text">
+          <h1 class="text-3xl text-black text-center textRegular">
             ${{ minPrice }} - ${{ maxPrice }}
           </h1>
         </div>
@@ -45,7 +45,7 @@
           *ngIf="costDisplayer"
           class="flex flex-col flex-wrap justify-center items-center gap-5"
         >
-          <h1 class="text-3xl text-black text-center text">
+          <h1 class="text-3xl text-black text-center textRegular">
             Please enter your Email to receive your estimate
           </h1>
           <form
@@ -103,7 +103,7 @@
         >
           <mat-expansion-panel-header>
             <mat-panel-title
-              class="text-2xl text"
+              class="text-2xl textRegular"
               [style.color]="step == i ? '#15a811' : '#000000'"
             >
               {{ section.name }}

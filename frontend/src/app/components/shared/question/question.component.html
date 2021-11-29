@@ -7,29 +7,29 @@
     w-screen
     pl-4
     pr-4
-    textFont
+    textLight
   "
 >
-  <div class="text-4xl text-center text lg:w-11/12 md:w-11/12">
+  <div class="text-4xl text-center text textRegular lg:w-11/12 md:w-11/12">
     <h1>
-      {{ currentQuestion.q_text }}
+      {{ currentQuestion.questionText }}
     </h1>
   </div>
   <div>
     <div
-      *ngIf="!currentQuestion.multiple_allowed"
+      *ngIf="!currentQuestion.multipleAllowed"
       class="flex flex-row flex-wrap justify-center gap-4"
     >
       <button
         *ngFor="let option of currentOptions; let i = index"
         (click)="onClicked(i, option)"
         class="text-lg py-2 px-4 rounded-lg buttonInQuestion cursor-pointer"
-        [ngClass]="selected == i ? 'ifTrue' : 'ifFalse'"
+        [ngClass]="selected == i ? 'selected' : 'avoided'"
       >
         {{ option.text }}
       </button>
     </div>
-    <div *ngIf="currentQuestion.multiple_allowed" class="items-center">
+    <div *ngIf="currentQuestion.multipleAllowed" class="items-center">
       <mat-chip-list
         [formControl]="answersFormControl"
         appearance="fill"

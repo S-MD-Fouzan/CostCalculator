@@ -3,13 +3,13 @@
 module.exports = {
   create: async (ctx) => {
     var data = ctx.request.body;
-    var questions = data.questions;
+    var questions=data.questions;
     var lowerEstimate = 0;
     var upperEstimate = 0;
     for (var i = 0; i < questions.length; i++) {
       for (var j = 0; j < questions[i].options.length; j++) {
-        lowerEstimate += questions[i].options[j].min_price;
-        upperEstimate += questions[i].options[j].max_price;
+        lowerEstimate += questions[i].options[j].minPrice;
+        upperEstimate += questions[i].options[j].maxPrice;
       }
     }
     data.lowerEstimate = lowerEstimate;

@@ -2,18 +2,24 @@
   "collectionName": "components_shared_questions",
   "info": {
     "name": "questions",
-    "icon": "address-book"
+    "icon": "address-book",
+    "description": ""
   },
   "options": {
     "timestamps": false,
-    "privateAttributes":["_id","id","published_at","__v"],
-    "populateCreatorFields":true
+    "privateAttributes": [
+      "_id",
+      "id",
+      "published_at",
+      "__v"
+    ],
+    "populateCreatorFields": true
   },
   "attributes": {
-    "q_text": {
+    "questionText": {
       "type": "string"
     },
-    "multiple_allowed": {
+    "multipleAllowed": {
       "type": "boolean"
     },
     "options": {

@@ -9,7 +9,7 @@ import { Submission } from '../models/submission.model';
   providedIn: 'root',
 })
 export class SectionService {
-  url: string = environment.API_URL;
+  url: string = environment.api;
   miniSections: SectionForHome[];
   sections: Section[] = [];
   widthsArray: number[] = [];
