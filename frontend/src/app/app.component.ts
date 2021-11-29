@@ -11,7 +11,7 @@ import { Section } from './models/section.model';
 export class AppComponent implements OnInit {
   title = 'cost-calculator';
   spinner: boolean;
-  error:boolean;
+  error: boolean;
   sections: Section[];
   constructor(private sectionService: SectionService) {}
 

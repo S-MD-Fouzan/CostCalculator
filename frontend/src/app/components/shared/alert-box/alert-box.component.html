@@ -7,12 +7,12 @@
   <div mat-dialog-actions class="flex flex-row justify-end mb-1">
     <div>
       <app-button
-          [previous]="true"
-          [buttonTextOne]="'Cancel'"
-          [buttonTextTwo]="'Ok'"
-          (onClickedOne)="close()"
-          (onClickedTwo)="proceed()"
-        ></app-button>
+        [previous]="true"
+        [buttonTextOne]="'Cancel'"
+        [buttonTextTwo]="'Ok'"
+        (clickedOne)="close()"
+        (clickedTwo)="proceed()"
+      ></app-button>
     </div>
   </div>
 </div>

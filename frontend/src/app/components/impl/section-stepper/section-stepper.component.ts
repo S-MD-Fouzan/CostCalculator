@@ -11,12 +11,6 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./section-stepper.component.scss'],
 })
 export class SectionStepperComponent implements OnInit {
-  selectedIndex: number = 0;
-  hide: boolean;
-  nextDisabled: boolean;
-  cardStringControl: string = '';
-  skipStringControl: string = '';
-
   @Input()
   sections: Section[];
   @Input()
@@ -36,6 +30,12 @@ export class SectionStepperComponent implements OnInit {
   @Output()
   public filled = new EventEmitter();
 
+  selectedIndex = 0;
+  hide: boolean;
+  nextDisabled: boolean;
+  cardStringControl = '';
+  skipStringControl = '';
+
   constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {
@@ -44,13 +44,13 @@ export class SectionStepperComponent implements OnInit {
     this.cardStringControl = this.cardStringControlArray[0];
     this.skipStringControl = this.skipStringControlArray[0];
   }
-  OnStep(event: StepperSelectionEvent): void {
+  onStep(event: StepperSelectionEvent): void {
     this.nextDisabled = true;
     this.hide = false;
     this.selectedIndex = event.selectedIndex;
   }
   buttonToggler($event: string): void {
-    if ($event == 'true') {
+    if ($event === 'true') {
       this.nextDisabled = false;
     }
   }
@@ -61,24 +61,18 @@ export class SectionStepperComponent implements OnInit {
     if (
       this.sectionsWithAnswers[stepper.selectedIndex].questions[0].options
         .length > 0 &&
-      check == true
+      check === true
     ) {
       const dialogRef = this.dialog.open(AlertBoxComponent);
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
-          for (
-            let i = 0;
-            i <
-            this.sectionsWithAnswers[stepper.selectedIndex].questions.length;
-            i++
-          ) {
-            this.sectionsWithAnswers[stepper.selectedIndex].questions[
-              i
-            ].options = [];
+          for (const question of this.sectionsWithAnswers[stepper.selectedIndex]
+            .questions) {
+            question.options = [];
           }
           this.widthsArray[stepper.selectedIndex] = 0;
-          for(let i=0;i<this.widthsArray.length;i++){
-            if(this.widthsArray[i]!==0){
+          for (const value of this.widthsArray) {
+            if (value !== 0) {
               this.filled.emit();
               break;
             }
@@ -104,7 +98,7 @@ export class SectionStepperComponent implements OnInit {
       }
     }
   }
-  ToHide(): void {
+  toHide(): void {
     this.hide = true;
   }
   sectionChange(index: number): void {
@@ -126,7 +120,7 @@ export class SectionStepperComponent implements OnInit {
       this.selectedIndex = index;
     }
   }
-  refreshHandler(): void{
+  refreshHandler(): void {
     this.filled.emit();
   }
 }

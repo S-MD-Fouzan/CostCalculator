@@ -17,7 +17,7 @@ export class SectionService {
   sectionsWithoutOptions: Section[] = [];
   cardStringControlArray: string[] = [];
   skipStringControlArray: string[] = [];
-  refreshHandler: boolean = false;
+  refreshHandler = false;
   constructor(private http: HttpClient) {}
   getSectionsFromServer(): Promise<Section[]> {
     return new Promise((resolve, reject) => {
@@ -41,10 +41,8 @@ export class SectionService {
     }
     this.sections = prods;
     if (this.sectionsWithoutOptions.length === 0) {
-      for (let i = 0; i < this.sections.length; i++) {
-        this.sectionsWithoutOptions.push(
-          JSON.parse(JSON.stringify(this.sections[i]))
-        );
+      for (const section of this.sections) {
+        this.sectionsWithoutOptions.push(JSON.parse(JSON.stringify(section)));
       }
       for (let i = 0; i < this.sections.length; i++) {
         this.sectionsWithoutOptions[i].questions.forEach((question) => {
@@ -83,10 +81,10 @@ export class SectionService {
     });
   }
   getFilledSections(): Section[] {
-    let filledSections: Section[] = [];
-    for (let i = 0; i < this.sectionsWithoutOptions.length; i++) {
-      if (this.sectionsWithoutOptions[i].questions[0].options.length > 0) {
-        filledSections.push(this.sectionsWithoutOptions[i]);
+    const filledSections: Section[] = [];
+    for (const section of this.sectionsWithoutOptions) {
+      if (section.questions[0].options.length > 0) {
+        filledSections.push(section);
       }
     }
     return filledSections;

@@ -29,13 +29,13 @@ export class AllSectionsComponent implements OnInit {
   sectionsWithAnswers: Section[];
   selectedIndex: number;
   costDisplayer: boolean;
-  minPrice: number = 0;
-  maxPrice: number = 0;
-  isEmpty: boolean = true;
+  minPrice = 0;
+  maxPrice = 0;
+  isEmpty = true;
   sectionsWithoutGeneralQuestions: Section[];
   filledSectionsArray: Section[] = [];
   costSpinner: boolean;
-  error: boolean = false;
+  error = false;
   cardStringControlArray: string[];
   skipStringControlArray: string[];
 
@@ -62,7 +62,7 @@ export class AllSectionsComponent implements OnInit {
 
   changeStatus(event: boolean): void {
     this.filledSectionsArray = this.sectionService.getFilledSections();
-    if (this.filledSectionsArray.length == 0) {
+    if (this.filledSectionsArray.length === 0) {
       this.isEmpty = true;
     } else {
       this.isEmpty = false;
@@ -85,7 +85,7 @@ export class AllSectionsComponent implements OnInit {
         this.error = true;
       });
   }
-  refreshHandler(): void{
-    this.sectionService.refreshHandler=!this.sectionService.refreshHandler;
+  refreshHandler(): void {
+    this.sectionService.refreshHandler = !this.sectionService.refreshHandler;
   }
 }

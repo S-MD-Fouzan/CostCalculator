@@ -5,6 +5,7 @@ import {
   Output,
   EventEmitter,
   SimpleChanges,
+  OnChanges,
 } from '@angular/core';
 import { Question } from '../../../models/question.model';
 import { Option } from '../../../models/question.model';
@@ -17,7 +18,7 @@ import { MatChip } from '@angular/material/chips';
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.scss'],
 })
-export class QuestionComponent implements OnInit {
+export class QuestionComponent implements OnInit, OnChanges {
   @Input()
   currentQuestion: Question;
   @Input()
@@ -37,14 +38,14 @@ export class QuestionComponent implements OnInit {
   selectedOptions: Option[];
   selected: number;
 
-  constructor(private _snackBar: MatSnackBar) {}
+  constructor(private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.selectedOptions = [];
     this.previous = false;
     this.currentOptions = this.currentQuestion.options;
     if (this.questionToAppendAnswers.options.length > 0) {
-      if (this.currentQuestion.multiple_allowed == true) {
+      if (this.currentQuestion.multiple_allowed === true) {
         this.answersFormControl.setValue(this.questionToAppendAnswers.options);
       } else {
         this.selected = this.currentQuestion.options.indexOf(
@@ -59,7 +60,7 @@ export class QuestionComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     this.currentOptions = this.currentQuestion.options;
     if (this.questionToAppendAnswers.options.length > 0) {
-      if (this.currentQuestion.multiple_allowed == true) {
+      if (this.currentQuestion.multiple_allowed === true) {
         this.answersFormControl.setValue(this.questionToAppendAnswers.options);
       } else {
         this.selected = this.currentQuestion.options.indexOf(
@@ -76,12 +77,12 @@ export class QuestionComponent implements OnInit {
   }
 
   onNext(): void {
-    if (this.currentQuestion.multiple_allowed == true) {
+    if (this.currentQuestion.multiple_allowed === true) {
       if (
         this.answersFormControl.value == null ||
-        this.answersFormControl.value.length == 0
+        this.answersFormControl.value.length === 0
       ) {
-        this._snackBar.open('Please select any option!', '', {
+        this.snackBar.open('Please select any option!', '', {
           verticalPosition: 'bottom',
           horizontalPosition: 'right',
           duration: 1500,
@@ -95,8 +96,8 @@ export class QuestionComponent implements OnInit {
         this.inNext.emit(this.indexOfQuestion);
       }
     } else {
-      if (this.questionToAppendAnswers.options.length == 0) {
-        this._snackBar.open('Please select any option!', '', {
+      if (this.questionToAppendAnswers.options.length === 0) {
+        this.snackBar.open('Please select any option!', '', {
           verticalPosition: 'bottom',
           horizontalPosition: 'right',
           duration: 1500,
@@ -112,7 +113,7 @@ export class QuestionComponent implements OnInit {
 
   onPrev(): void {
     this.inPrev.emit(this.indexOfQuestion);
-    if (this.indexOfQuestion - 1 == 0) {
+    if (this.indexOfQuestion - 1 === 0) {
       this.previous = false;
     }
   }
@@ -121,5 +122,4 @@ export class QuestionComponent implements OnInit {
     this.questionToAppendAnswers.options = [option];
     this.selected = i;
   }
-
 }

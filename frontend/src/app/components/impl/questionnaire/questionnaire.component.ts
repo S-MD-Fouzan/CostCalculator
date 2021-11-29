@@ -8,29 +8,29 @@ import { Section } from '../../../models/section.model';
   styleUrls: ['./questionnaire.component.scss'],
 })
 export class QuestionnaireComponent implements OnInit {
-  index: number = 0;
-  WidthIncrement: number = 0;
   @Input()
   currentSection: Section;
   @Input()
   currentSectionWithoutOptions: Section;
   @Output()
   public atSummary = new EventEmitter<string>();
-  summary: boolean;
   @Output()
   public adjustWidth = new EventEmitter<number>();
   @Output()
   public filled = new EventEmitter();
+
+  index = 0;
+  widthIncrement = 0;
   width: number;
   currentQuestion: Question;
   currentQuestionWithoutOptions: Question;
-
+  summary: boolean;
   constructor() {}
 
   ngOnInit(): void {
     this.index = 0;
     this.summary = false;
-    this.WidthIncrement = 100 / this.currentSection.questions.length;
+    this.widthIncrement = 100 / this.currentSection.questions.length;
     this.width = 0;
     this.currentQuestion = this.currentSection.questions[this.index];
     this.currentQuestionWithoutOptions =
@@ -38,10 +38,10 @@ export class QuestionnaireComponent implements OnInit {
   }
 
   nextIsClicked($event: number): void {
-    this.width = (this.index + 1) * this.WidthIncrement;
+    this.width = (this.index + 1) * this.widthIncrement;
     this.adjustWidth.emit(this.width);
 
-    if (this.index == this.currentSection.questions.length - 1) {
+    if (this.index === this.currentSection.questions.length - 1) {
       this.summary = true;
       this.atSummary.emit('true');
     } else {
@@ -57,7 +57,7 @@ export class QuestionnaireComponent implements OnInit {
     this.currentQuestionWithoutOptions =
       this.currentSectionWithoutOptions.questions[this.index];
   }
-  refreshHandler(): void{
+  refreshHandler(): void {
     this.filled.emit();
   }
 }

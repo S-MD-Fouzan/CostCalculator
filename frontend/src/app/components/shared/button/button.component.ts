@@ -16,19 +16,19 @@ export class ButtonComponent implements OnInit {
   buttonTextTwo: string;
 
   @Output()
-  public onClickedOne = new EventEmitter();
+  public clickedOne = new EventEmitter();
 
   @Output()
-  public onClickedTwo = new EventEmitter();
+  public clickedTwo = new EventEmitter();
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  onClickOne(){
-    this.onClickedOne.emit();
+  onClickOne() {
+    this.clickedOne.emit();
   }
-  onClickTwo(){
-    this.onClickedTwo.emit();
+  onClickTwo() {
+    this.clickedTwo.emit();
   }
 }

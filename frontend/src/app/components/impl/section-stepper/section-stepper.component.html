@@ -64,7 +64,7 @@
 <div class="py-10">
   <mat-stepper
     labelPosition="bottom"
-    (selectionChange)="OnStep($event)"
+    (selectionChange)="onStep($event)"
     [selectedIndex]="selectedIndex"
     #stepper
   >
@@ -72,8 +72,8 @@
       <div class="w-full h-full flex flex-col justify-center">
         <div *ngIf="!hide" class="flex flex-col flex-wrap justify-center">
           <app-section-preview-card
-            (onStart)="ToHide()"
-            (onSkip)="switchIt(stepper, $event)"
+            (startClicked)="toHide()"
+            (skipClicked)="switchIt(stepper, $event)"
             [sectionName]="section.name"
             [sectionContent]="section.content"
             [cardStringControl]="cardStringControl"
