@@ -1,5 +1,5 @@
 <div
-  *ngIf="isEmpty(questionsWithSelectedOptions)"
+  *ngIf="questionsWithSelectedOptions[0].options.length > 0"
   class="flex flex-col sm:justify-center"
 >
   <div>

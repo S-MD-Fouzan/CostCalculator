@@ -49,7 +49,6 @@ export class FinalOverviewComponent implements OnInit {
   public submission = new EventEmitter<Submission>();
 
   step = 0;
-  arrayOfQuestionsWithAnswers: Question[] = [];
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
@@ -79,14 +78,14 @@ export class FinalOverviewComponent implements OnInit {
       finalData.email = this.emailFormControl.value;
       finalData.lowerEstimate = 0;
       finalData.upperEstimate = 0;
+      finalData.questions = [] as Question[];
       for (const section of this.filledSectionsArray) {
         section.questions.forEach((question) => {
           if (question.options.length > 0) {
-            this.arrayOfQuestionsWithAnswers.push(question);
+            finalData.questions.push(question);
           }
         });
       }
-      finalData.questions = this.arrayOfQuestionsWithAnswers;
       this.submission.emit(finalData);
     }
   }

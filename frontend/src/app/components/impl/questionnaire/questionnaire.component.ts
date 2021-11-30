@@ -19,8 +19,8 @@ export class QuestionnaireComponent implements OnInit {
   @Output()
   public filled = new EventEmitter();
 
-  index = 0;
-  widthIncrement = 0;
+  index: number;
+  widthIncrement: number;
   width: number;
   currentQuestion: Question;
   currentQuestionWithoutOptions: Question;
@@ -32,11 +32,13 @@ export class QuestionnaireComponent implements OnInit {
     this.summary = false;
     this.widthIncrement = 100 / this.currentSection.questions.length;
     this.width = 0;
+    this.questionInitializer();
+  }
+  questionInitializer(): void {
     this.currentQuestion = this.currentSection.questions[this.index];
     this.currentQuestionWithoutOptions =
       this.currentSectionWithoutOptions.questions[this.index];
   }
-
   nextIsClicked($event: number): void {
     this.width = (this.index + 1) * this.widthIncrement;
     this.adjustWidth.emit(this.width);
@@ -46,18 +48,14 @@ export class QuestionnaireComponent implements OnInit {
       this.atSummary.emit('true');
     } else {
       this.index = $event + 1;
-      this.currentQuestion = this.currentSection.questions[this.index];
-      this.currentQuestionWithoutOptions =
-        this.currentSectionWithoutOptions.questions[this.index];
+      this.questionInitializer();
     }
   }
   prevIsClicked($event: number): void {
     this.index = $event - 1;
-    this.currentQuestion = this.currentSection.questions[this.index];
-    this.currentQuestionWithoutOptions =
-      this.currentSectionWithoutOptions.questions[this.index];
+    this.questionInitializer();
   }
-  refreshHandler(): void {
+  onAnswering(): void {
     this.filled.emit();
   }
 }

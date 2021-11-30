@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     this.spinner = true;
     try{
     this.sections = await this.sectionService.getSectionsFromServer();
-    this.sectionService.sendData(this.sections);
+    this.sectionService.initializer(this.sections);
     this.spinner = false;
     this.error=false;
     }

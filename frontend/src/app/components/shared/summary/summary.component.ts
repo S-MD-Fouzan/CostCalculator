@@ -13,12 +13,4 @@ export class SummaryComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
-  isEmpty(questions: Question[]): boolean {
-    if (questions[0].options.length > 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 }
