@@ -90,13 +90,12 @@
           ></app-questionnaire>
         </div>
         <div class="flex flex-row flex-wrap justify-end mt-5 w-4/5 self-center">
-          <button
-            *ngIf="!nextDisabled"
-            (click)="switchIt(stepper, false)"
-            class="text-lg py-2 px-4 rounded-lg nextButton"
-          >
-            Next
-          </button>
+          <app-button
+            [canDisplay]="!nextDisabled"
+            [buttonText]="'Next'"
+            [buttonClass]="'nextButton'"
+            (clicked)="switchIt(stepper,false)"
+          ></app-button>
         </div>
       </div>
     </mat-step>

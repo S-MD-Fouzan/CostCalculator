@@ -30,19 +30,16 @@ body {
   font-family: $regular, $defaultFont;
   font-weight: 600;
 }
-.skipButton {
-  min-height: 64px;
-  min-width: 160px;
-  white-space: pre-wrap !important;
-  font-family: $regular, $defaultFont;
-}
 .previousButton {
-  min-height: 64px;
-  min-width: 160px;
   background-color: $secondary-light;
   color: $secondary;
   font-family: $light, $defaultFont;
   font-weight: 600;
+}
+.button {
+  min-height: 64px;
+  min-width: 160px;
+  white-space: pre-wrap !important;
 }
 .previousButton:hover {
   border: 1.5px solid $secondary;
@@ -55,8 +52,6 @@ body {
   color: $primary;
 }
 .nextButton {
-  min-height: 64px;
-  min-width: 160px;
   background-color: $primary;
   color: $secondary-light;
   font-family: $light, $defaultFont;

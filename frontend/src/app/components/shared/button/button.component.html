@@ -1,15 +1,16 @@
-<div class="flex flex-row flex-wrap gap-5">
-  <button
-    class="previousButton text-lg py-2 px-4 rounded-lg"
-    *ngIf="previous"
-    (click)="onClickOne()"
-  >
-    {{buttonTextOne}}
-  </button>
-  <button
-    class="nextButton text-lg py-2 px-4 rounded-lg"
-    (click)="onClickTwo()"
-  >
-    {{buttonTextTwo}}
-  </button>
-</div>
+<button
+  class="text-lg py-2 px-4 rounded-lg"
+  *ngIf="canDisplay"
+  (click)="onClick()"
+  [ngClass]="{
+    nextButton: buttonClass === 'nextButton',
+    previousButton: buttonClass === 'previousButton',
+    textRegular: buttonClass === 'textRegular',
+    selected: buttonClass === 'selected',
+    avoided: buttonClass === 'avoided',
+    button: buttonClass !== 'getStarted',
+    getStarted: buttonClass === 'getStarted' 
+  }"
+>
+  {{ buttonText }}
+</button>

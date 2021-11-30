@@ -1,1 +1,25 @@
 @import "../../../../styles/general-styles.scss";
+.selected {
+  background-color: $primary-light;
+  color: $secondary-light;
+  font-weight: 600;
+  height: fit-content;
+}
+.avoided {
+  background-color: $secondary-light;
+  color: $secondary;
+  font-weight: 200;
+  height: fit-content;
+}
+.getStarted {
+  background-color: $primary;
+  color: $secondary-light;
+  border-width: 1.5px;
+  font-weight: 700;
+}
+.getStarted:hover {
+  background-color: $pure-white;
+  border: 1.5px solid $primary;
+  color: $primary;
+  font-weight: 700;
+}

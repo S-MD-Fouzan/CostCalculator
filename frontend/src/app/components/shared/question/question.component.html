@@ -20,14 +20,13 @@
       *ngIf="!currentQuestion.multipleAllowed"
       class="flex flex-row flex-wrap justify-center gap-4"
     >
-      <button
+    <app-button
         *ngFor="let option of currentOptions; let i = index"
-        (click)="onClicked(i, option)"
-        class="text-lg py-2 px-4 rounded-lg buttonInQuestion cursor-pointer"
-        [ngClass]="selected == i ? 'selected' : 'avoided'"
-      >
-        {{ option.text }}
-      </button>
+        [canDisplay]="true"
+        [buttonText]="option.text"
+        [buttonClass]="selected == i ? 'selected' : 'avoided'"
+        (clicked)="onClicked(i, option)"
+      ></app-button>
     </div>
     <div *ngIf="currentQuestion.multipleAllowed" class="items-center">
       <mat-chip-list
@@ -59,12 +58,19 @@
     </div>
   </div>
   <div class="flex flex-row flex-wrap justify-end lg:w-4/5 md:w-4/5">
-    <app-button
-      [previous]="previous"
-      [buttonTextOne]="'Prev'"
-      [buttonTextTwo]="'Next'"
-      (clickedOne)="onPrev()"
-      (clickedTwo)="onNext()"
-    ></app-button>
+    <div class="flex flex-row flex-wrap gap-5">
+      <app-button
+        [canDisplay]="previous"
+        [buttonText]="'Prev'"
+        [buttonClass]="'previousButton'"
+        (clicked)="onPrev()"
+      ></app-button>
+      <app-button
+        [canDisplay]="true"
+        [buttonText]="'Next'"
+        [buttonClass]="'nextButton'"
+        (clicked)="onNext()"
+      ></app-button>
+    </div>
   </div>
 </div>

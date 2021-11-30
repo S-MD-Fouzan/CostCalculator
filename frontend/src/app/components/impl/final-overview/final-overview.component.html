@@ -48,10 +48,7 @@
           <h1 class="text-3xl text-black text-center textRegular">
             Please enter your Email to receive your estimate
           </h1>
-          <form
-            (ngSubmit)="onSubmit()"
-            class="flex flex-col justify-center items-center"
-          >
+          <form class="flex flex-col justify-center items-center">
             <div class="flex flex-row flex-wrap justify-center gap-3">
               <mat-form-field
                 appearance="outline"
@@ -76,20 +73,12 @@
                   Email is required
                 </mat-error>
               </mat-form-field>
-              <button
-                type="submit"
-                class="
-                  text-lg
-                  py-2
-                  px-4
-                  h-16
-                  rounded-lg
-                  nextButton
-                  cursor-pointer
-                "
-              >
-                Submit
-              </button>
+              <app-button
+                [canDisplay]="true"
+                [buttonText]="'Submit'"
+                [buttonClass]="'nextButton'"
+                (clicked)="onSubmit()"
+              ></app-button>
             </div>
           </form>
         </div>
@@ -116,13 +105,20 @@
             class="flex flex-row flex-wrap gap-2 justify-end mr-5"
             *ngIf="filledSectionsArray.length !== 1"
           >
-            <app-button
-              [previous]="true"
-              [buttonTextOne]="'Previous'"
-              [buttonTextTwo]="'Next'"
-              (clickedOne)="prevStep()"
-              (clickedTwo)="nextStep()"
-            ></app-button>
+            <div class="flex flex-row flex-wrap gap-5">
+              <app-button
+                [canDisplay]="true"
+                [buttonText]="'Previous'"
+                [buttonClass]="'previousButton'"
+                (clicked)="prevStep()"
+              ></app-button>
+              <app-button
+                [canDisplay]="true"
+                [buttonText]="'Next'"
+                [buttonClass]="'nextButton'"
+                (clicked)="nextStep()"
+              ></app-button>
+            </div>
           </mat-action-row>
         </mat-expansion-panel>
       </mat-accordion>
