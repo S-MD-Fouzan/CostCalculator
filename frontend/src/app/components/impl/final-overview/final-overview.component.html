@@ -1,7 +1,7 @@
 <div class="summary space-y-5 sm:pl-5 sm:pr-5">
   <div
     *ngIf="isEmpty"
-    class="w-full h-full flex justify-center text-2xl mt-14 text"
+    class="w-full h-full flex justify-center text-2xl mt-14 textRegular"
   >
     <h1>You haven't answered any of the questions.</h1>
   </div>
@@ -34,10 +34,10 @@
           *ngIf="!costDisplayer"
           class="flex flex-col justify-center items-center space-y-5"
         >
-          <h1 class="text-4xl text-black text-center text">
+          <h1 class="text-4xl text-black text-center textRegular">
             Here's the estimate of your project
           </h1>
-          <h1 class="text-3xl text-black text-center text">
+          <h1 class="text-3xl text-black text-center textRegular">
             ${{ minPrice }} - ${{ maxPrice }}
           </h1>
         </div>
@@ -45,13 +45,10 @@
           *ngIf="costDisplayer"
           class="flex flex-col flex-wrap justify-center items-center gap-5"
         >
-          <h1 class="text-3xl text-black text-center text">
+          <h1 class="text-3xl text-black text-center textRegular">
             Please enter your Email to receive your estimate
           </h1>
-          <form
-            (ngSubmit)="onSubmit()"
-            class="flex flex-col justify-center items-center"
-          >
+          <form class="flex flex-col justify-center items-center">
             <div class="flex flex-row flex-wrap justify-center gap-3">
               <mat-form-field
                 appearance="outline"
@@ -76,20 +73,12 @@
                   Email is required
                 </mat-error>
               </mat-form-field>
-              <button
-                type="submit"
-                class="
-                  text-lg
-                  py-2
-                  px-4
-                  h-16
-                  rounded-lg
-                  nextButton
-                  cursor-pointer
-                "
-              >
-                Submit
-              </button>
+              <app-button
+                [canDisplay]="true"
+                [buttonText]="'Submit'"
+                [buttonClass]="'nextButton'"
+                (clicked)="onSubmit()"
+              ></app-button>
             </div>
           </form>
         </div>
@@ -103,7 +92,7 @@
         >
           <mat-expansion-panel-header>
             <mat-panel-title
-              class="text-2xl text"
+              class="text-2xl textRegular"
               [style.color]="step == i ? '#15a811' : '#000000'"
             >
               {{ section.name }}
@@ -116,13 +105,20 @@
             class="flex flex-row flex-wrap gap-2 justify-end mr-5"
             *ngIf="filledSectionsArray.length !== 1"
           >
-            <app-button
-              [previous]="true"
-              [buttonTextOne]="'Previous'"
-              [buttonTextTwo]="'Next'"
-              (onClickedOne)="prevStep()"
-              (onClickedTwo)="nextStep()"
-            ></app-button>
+            <div class="flex flex-row flex-wrap gap-5">
+              <app-button
+                [canDisplay]="true"
+                [buttonText]="'Previous'"
+                [buttonClass]="'previousButton'"
+                (clicked)="prevStep()"
+              ></app-button>
+              <app-button
+                [canDisplay]="true"
+                [buttonText]="'Next'"
+                [buttonClass]="'nextButton'"
+                (clicked)="nextStep()"
+              ></app-button>
+            </div>
           </mat-action-row>
         </mat-expansion-panel>
       </mat-accordion>

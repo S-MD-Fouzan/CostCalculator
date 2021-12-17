@@ -7,17 +7,17 @@
       (ngModel)="(index)"
       (inNext)="nextIsClicked($event)"
       (inPrev)="prevIsClicked($event)"
-      (filled)="refreshHandler()"
+      (filled)="onAnswering()"
     ></app-question>
   </div>
   <div [hidden]="!summary" class="w-4/5">
     <div class="flex flex-col justify-start">
-      <p class="text-3xl subText text-center mt-5">
+      <p class="text-3xl subText textRegular text-center mt-5">
         Here's what you've answered
       </p>
       <div>
         <div>
-          <h1 class="text-2xl text-left heading mt-5">
+          <h1 class="text-2xl text-left heading textRegular mt-5">
             {{ currentSection.name }}
           </h1>
         </div>

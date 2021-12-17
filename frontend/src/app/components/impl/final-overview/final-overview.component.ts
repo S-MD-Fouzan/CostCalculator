@@ -30,8 +30,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./final-overview.component.scss'],
 })
 export class FinalOverviewComponent implements OnInit {
-  step: number = 0;
-
   @Input()
   isEmpty: boolean;
   @Input()
@@ -46,19 +44,21 @@ export class FinalOverviewComponent implements OnInit {
   maxPrice: number;
   @Input()
   filledSectionsArray: Section[];
+
   @Output()
   public submission = new EventEmitter<Submission>();
 
+  step = 0;
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
   ]);
+
   matcher = new MyErrorStateMatcher();
-  arrayOfQuestionsWithAnswers: Question[] = [];
+
   constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   setStep(index: number): void {
     this.step = index;
@@ -74,17 +74,18 @@ export class FinalOverviewComponent implements OnInit {
 
   onSubmit(): void {
     if (this.emailFormControl.valid) {
-      let finalData: Submission = <Submission>{};
+      const finalData: Submission = {} as Submission;
       finalData.email = this.emailFormControl.value;
       finalData.lowerEstimate = 0;
       finalData.upperEstimate = 0;
-      for (let i = 0; i < this.filledSectionsArray.length; i++) {
-        this.arrayOfQuestionsWithAnswers = [
-          ...this.filledSectionsArray[i].questions,
-          ...this.arrayOfQuestionsWithAnswers,
-        ];
+      finalData.questions = [] as Question[];
+      for (const section of this.filledSectionsArray) {
+        section.questions.forEach((question) => {
+          if (question.options.length > 0) {
+            finalData.questions.push(question);
+          }
+        });
       }
-      finalData.questions = this.arrayOfQuestionsWithAnswers;
       this.submission.emit(finalData);
     }
   }

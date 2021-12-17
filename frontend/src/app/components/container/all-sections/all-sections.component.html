@@ -1,16 +1,53 @@
-<div class="addFont">
+<div class="textLight">
   <div *ngIf="final" class="w-full h-full flex flex-col justify-center py-10">
     <app-section-stepper
+      [selectedIndex]="selectedIndex"
       [sections]="sections"
-      [sectionsWithAnswers]="sectionsWithAnswers"
       [widthsArray]="widthsArray"
       [sectionColoring]="sectionColoring"
       [length]="length"
-      [cardStringControlArray]="cardStringControlArray"
-      [skipStringControlArray]="skipStringControlArray"
-      (changeStatus)="changeStatus($event)"
-      (filled)="refreshHandler()"
+      (changeStatus)="sectionChange($event)"
     ></app-section-stepper>
+    <div class="py-10">
+      <mat-stepper
+        labelPosition="bottom"
+        (selectionChange)="onStep($event)"
+        [selectedIndex]="selectedIndex"
+        #stepper
+      >
+        <mat-step *ngFor="let section of sections; let i = index">
+          <div class="w-full h-full flex flex-col justify-center">
+            <div *ngIf="!hide" class="flex flex-col flex-wrap justify-center">
+              <app-section-preview-card
+                (startClicked)="toHide()"
+                (skipClicked)="switchIt(stepper, $event)"
+                [sectionName]="section.name"
+                [sectionContent]="section.content"
+                [cardStringControl]="cardStringControl"
+                [skipStringControl]="skipStringControl"
+              ></app-section-preview-card>
+            </div>
+            <div *ngIf="hide" class="flex flex-col justify-center">
+              <app-questionnaire
+                [currentSection]="section"
+                [currentSectionWithoutOptions]="sectionsWithAnswers[i]"
+                (atSummary)="buttonToggler($event)"
+                (adjustWidth)="adjustingWidth($event, i)"
+                (filled)="onAnswering()"
+              ></app-questionnaire>
+            </div>
+            <div class="flex flex-row flex-wrap justify-end mt-5 w-4/5 self-center">
+              <app-button
+                [canDisplay]="!nextDisabled"
+                [buttonText]="'Next'"
+                [buttonClass]="'nextButton'"
+                (clicked)="switchIt(stepper,false)"
+              ></app-button>
+            </div>
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </div>
   </div>
   <div *ngIf="!final">
     <app-final-overview

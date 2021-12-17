@@ -2,28 +2,30 @@
   <mat-card
     class="flex flex-col flex-wrap sm:w-4/5 md:w-3/5 lg:w-2/5 cardColoring"
   >
-    <mat-card-title class="text-2xl titleText">{{
+    <mat-card-title class="text-2xl content textRegular">{{
       sectionName
     }}</mat-card-title>
     <mat-card-content>
-      <p class="text-lg content">
+      <p class="text-lg content textLight">
         {{ sectionContent }}
       </p>
     </mat-card-content>
     <mat-card-actions class="pl-2">
-      <div class="flex flex-row flex-wrap md:space-x-2 lg:space-x-2">
-        <button
-          (click)="onSectionStart()"
-          class="text-lg py-2 px-4 rounded-lg nextButton"
-        >
-          {{ cardStringControl }}
-        </button>
-        <button
-          (click)="onSectionSkip()"
-          class="text-lg py-2 px-4 rounded-lg SkipButton"
-        >
-          {{ skipStringControl }} {{ sectionName }}
-        </button>
+      <div class="flex flex-row flex-wrap gap-2">
+        <div>
+          <app-button
+            [canDisplay]="true"
+            [buttonText]="cardStringControl"
+            [buttonClass]="'nextButton'"
+            (clicked)="onSectionStart()"
+          ></app-button>
+          <app-button
+            [canDisplay]="true"
+            [buttonText]="skipStringControl + ' ' + sectionName"
+            [buttonClass]="'textRegular'"
+            (clicked)="onSectionSkip()"
+          ></app-button>
+        </div>
       </div>
     </mat-card-actions>
   </mat-card>

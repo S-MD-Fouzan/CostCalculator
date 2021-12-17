@@ -16,17 +16,17 @@ export class SectionPreviewCardComponent implements OnInit {
   skipStringControl: string;
 
   @Output()
-  public onStart = new EventEmitter();
+  public startClicked = new EventEmitter();
   @Output()
-  public onSkip = new EventEmitter<boolean>();
+  public skipClicked = new EventEmitter<boolean>();
 
   constructor() {}
 
   ngOnInit(): void {}
   onSectionStart(): void {
-    this.onStart.emit();
+    this.startClicked.emit();
   }
   onSectionSkip(): void {
-    this.onSkip.emit(true);
+    this.skipClicked.emit(true);
   }
 }
