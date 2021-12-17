@@ -26,13 +26,13 @@ The questions that were asked in each section cover digital aspects essential to
   * questions of type repeatable component "Questions".
 > Components in strapi:
 * Questions
-  * q_text of type string which specifies the text of the question.
-  * multiple_allowed of type boolean to specify whether the multiple options are allowed for selection or not.
+  * questionText of type string which specifies the text of the question.
+  * multipleAllowed of type boolean to specify whether the multiple options are allowed for selection or not.
   * options of type repeatable component "Options".
 * Options
   * text of type string.
-  * min_cost of type number.
-  * max_cost of type number. 
+  * minPrice of type number.
+  * maxPrice of type number. 
 ## Cloning the repository
 > Run `git clone https://github.com/S-MD-Fouzan/CostCalculator.git` to clone the repository in your local machine.
 ## Configuring Backend

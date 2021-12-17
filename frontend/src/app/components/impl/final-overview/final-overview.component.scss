@@ -1,4 +1,5 @@
 @import "../../../../styles/general-styles.scss";
+
 ::ng-deep .mat-progress-spinner circle,
 .mat-spinner circle {
   stroke: $primary;
@@ -25,9 +26,6 @@
   flex-flow: column;
   justify-content: center;
   align-items: center;
-}
-.text {
-  font-family: "Montserrat-Regular", $defaultFont;
 }
 .spinner {
   position: fixed;

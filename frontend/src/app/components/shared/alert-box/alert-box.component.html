@@ -1,9 +1,23 @@
 <div class="flex flex-col gap-3 w-auto h-auto">
-<h1 mat-dialog-title class="fontDisplay">Confirm Action</h1>
-<mat-divider></mat-divider>
-<h2 class="text-2xl text-center pt-3">Your stored data will be lost. Do you wish to continue?</h2>
-<div mat-dialog-actions class="flex flex-row justify-end mb-1">
-<div><button mat-button (click)="close()" class="float-right mr-5 mt-5 rounded-lg cancel">Cancel</button></div>
-<div><button mat-button class="float-right mr-5 mt-5 rounded-lg ok" (click)="proceed()">Ok</button></div>
-</div>
+  <h1 mat-dialog-title class="textRegular">Confirm Action</h1>
+  <mat-divider></mat-divider>
+  <h2 class="text-2xl text-center pt-3">
+    Your stored data will be lost. Do you wish to continue?
+  </h2>
+  <div mat-dialog-actions class="flex flex-row justify-end mb-1">
+    <div class="flex flex-row flex-wrap gap-5">
+      <app-button
+        [canDisplay]="true"
+        [buttonText]="'Cancel'"
+        [buttonClass]="'previousButton'"
+        (clicked)="close()"
+      ></app-button>
+      <app-button
+        [canDisplay]="true"
+        [buttonText]="'Ok'"
+        [buttonClass]="'nextButton'"
+        (clicked)="proceed()"
+      ></app-button>
+    </div>
+  </div>
 </div>

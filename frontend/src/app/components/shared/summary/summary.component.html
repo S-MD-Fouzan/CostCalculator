@@ -1,29 +1,11 @@
 <div
-  *ngIf="isEmpty(questionsWithSelectedOptions)"
+  *ngIf="questionsWithSelectedOptions[0].options.length > 0"
   class="flex flex-col sm:justify-center"
 >
   <div>
     <div *ngFor="let question of questionsWithSelectedOptions">
       <div *ngIf="question.options.length > 0" class="pt-5">
-        <mat-card class="overviewCard w-min min-w-full rounded-lg">
-          <p class="text-xl">{{ question.q_text }}</p>
-          <div class="flex flex-col gap-3 md:flex-row md:flex-wrap md:gap-5">
-            <div
-              *ngFor="let option of question.options"
-              class="
-                flex flex-wrap
-                answer
-                mt-5
-                py-2
-                px-5
-                rounded-lg
-                md:mt-5 md:px-10
-              "
-            >
-              {{ option.text }}
-            </div>
-          </div>
-        </mat-card>
+        <app-question-overview [question]="question"></app-question-overview>
       </div>
     </div>
   </div>
