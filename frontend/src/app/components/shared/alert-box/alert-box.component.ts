@@ -1,22 +1,20 @@
-import { Component, OnInit} from '@angular/core';
-import {MatDialogRef} from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-alert-box',
   templateUrl: './alert-box.component.html',
-  styleUrls: ['./alert-box.component.scss']
+  styleUrls: ['./alert-box.component.scss'],
 })
 export class AlertBoxComponent implements OnInit {
+  constructor(public dialogRef: MatDialogRef<AlertBoxComponent>) {}
 
-  constructor(public dialogRef: MatDialogRef<AlertBoxComponent>) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-  
-  close():void{
+  close(): void {
     this.dialogRef.close(false);
   }
-  proceed():void{
+  proceed(): void {
     this.dialogRef.close(true);
   }
 }

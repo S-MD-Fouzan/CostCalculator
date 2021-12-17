@@ -1,0 +1,82 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import "./color-styles.scss";
+@import "./font-styles.scss";
+body {
+  padding: 0;
+  margin: 0;
+  font-family: $light, $defaultFont;
+}
+.toolTipStyle {
+  background-color: $primary !important;
+}
+.textLight{
+  font-family: $light, $defaultFont;
+}
+.textRegular{
+  font-family: $regular, $defaultFont;
+}
+
+.customSnackBar {
+  background-color: $secondary-light;
+  color: red;
+  border-left: 5px solid red;
+  border-radius: 2px;
+  font-family: $regular, $defaultFont;
+  font-weight: 600;
+}
+.previousButton {
+  background-color: $secondary-light;
+  color: $secondary;
+  font-family: $light, $defaultFont;
+  font-weight: 600;
+}
+.button {
+  min-height: 64px;
+  min-width: 160px;
+  white-space: pre-wrap !important;
+}
+.previousButton:hover {
+  border: 1.5px solid $secondary;
+  background-color: $pure-white;
+  color: $secondary;
+}
+.nextButton:hover {
+  border: 1.5px solid $primary;
+  background-color: $pure-white;
+  color: $primary;
+}
+.nextButton {
+  background-color: $primary;
+  color: $secondary-light;
+  font-family: $light, $defaultFont;
+  white-space: pre-wrap !important;
+  font-weight: 600;
+}
+@media screen and (min-width: 1024px) {
+  .progressBarDisable {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 720px) and (max-width: 1024px) {
+  .progressBarDisable {
+    display: none;
+  }
+}
+@media screen and (min-width: 540px) and (max-width: 720px) {
+  .classChange {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .classChange {
+    display: none;
+  }
+}

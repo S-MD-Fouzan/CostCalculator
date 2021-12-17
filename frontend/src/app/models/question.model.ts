@@ -1,10 +1,10 @@
 export interface Question {
-    q_text: string;
+    questionText: string;
     options: Option[];
-    multiple_allowed: boolean;
+    multipleAllowed: boolean;
 }
 export interface Option {
     text: string;
-    min_price: number;
-    max_price: number;
+    minPrice: number;
+    maxPrice: number;
 }

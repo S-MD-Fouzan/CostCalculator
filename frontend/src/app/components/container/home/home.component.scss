@@ -1,4 +1,4 @@
-@import "../../../../styles.scss";
+@import "../../../../styles/general-styles.scss";
 .fullPage {
   background-color: $pure-white;
   min-height: 100vh;
@@ -11,21 +11,8 @@
   color: $pure-black;
   font-weight: 600;
 }
-.getStarted {
-  background-color: $primary;
-  color: $secondary-light;
-  border-width: 1.5px;
-}
-.getStarted:hover {
-  background-color: $pure-white;
-  border: 1.5px solid $primary;
-  color: $primary;
-}
-.btnHome {
+.iconHome {
   font-size: 30px;
   background-color: $primary;
   color: $secondary-light;
-}
-.mainHeading {
-  font-size: 50px;
 }

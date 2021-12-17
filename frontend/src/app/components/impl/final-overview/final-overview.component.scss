@@ -1,36 +1,37 @@
-@import "../../../../styles.scss";
-  ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
-    stroke: $primary;
-  }
-  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-    color:$pure-black;
-  }
-  ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-    color: $primary;
-  }
-  ::ng-deep .mat-form-field-label {
-    color: $pure-black;
-  }
-  ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
-    color: $primary;
-  }
-  ::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
-    color: red!important;
-  }
-  .summary {
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .text {
-    font-family: "Montserrat-Regular";
-  }
-  .spinner{
-    position: fixed;
-    background:white;
-    opacity: 0.8;
-    z-index: 99;
-    top:0;
-    bottom: 0;
-  }
+@import "../../../../styles/general-styles.scss";
+
+::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: $primary;
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: $pure-black;
+}
+::ng-deep
+  .mat-form-field-appearance-outline.mat-focused
+  .mat-form-field-outline-thick {
+  color: $primary;
+}
+::ng-deep .mat-form-field-label {
+  color: $pure-black;
+}
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: $primary;
+}
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: red !important;
+}
+.summary {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+.spinner {
+  position: fixed;
+  background: white;
+  opacity: 0.8;
+  z-index: 99;
+  top: 0;
+  bottom: 0;
+}

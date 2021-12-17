@@ -1,0 +1,9 @@
+@import "../../../../styles/general-styles.scss";
+.contentTrue {
+  background-color: $primary;
+  color: $secondary-light;
+}
+.contentFalse {
+  background-color: $secondary-light;
+  color: $secondary;
+}

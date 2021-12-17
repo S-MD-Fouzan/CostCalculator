@@ -5,8 +5,9 @@ import { AllSectionsComponent } from './components/container/all-sections/all-se
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'all-sections', component: AllSectionsComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path:'**', redirectTo:'/home'}
 ];
 
 @NgModule({

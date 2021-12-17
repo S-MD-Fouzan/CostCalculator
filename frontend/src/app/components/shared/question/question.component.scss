@@ -1,28 +1,7 @@
-@import "../../../../styles.scss";
-.buttonInQuestion {
-  min-height: 64px;
-  min-width: 160px;
-  white-space: pre-wrap !important;
-}
+@import "../../../../styles/general-styles.scss";
 .text {
   color: $secondary;
-  font-family: "Montserrat-Regular";
 }
-.chips{
+.chips {
   color: $secondary;
-}
-.textFont {
-  font-family: "Montserrat-Light";
-}
-.ifTrue{
-  background-color: $primary-light;
-  color: $secondary-light;
-  font-weight: 600;
-  height: fit-content;
-}
-.ifFalse{
-  background-color: $secondary-light;
-  color: $secondary;
-  font-weight: 200;
-  height: fit-content;
 }

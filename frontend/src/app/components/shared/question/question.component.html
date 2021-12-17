@@ -7,29 +7,28 @@
     w-screen
     pl-4
     pr-4
-    textFont
+    textLight
   "
 >
-  <div class="text-4xl text-center text lg:w-11/12 md:w-11/12">
+  <div class="text-4xl text-center text textRegular lg:w-11/12 md:w-11/12">
     <h1>
-      {{ currentQuestion.q_text }}
+      {{ currentQuestion.questionText }}
     </h1>
   </div>
   <div>
     <div
-      *ngIf="!currentQuestion.multiple_allowed"
+      *ngIf="!currentQuestion.multipleAllowed"
       class="flex flex-row flex-wrap justify-center gap-4"
     >
-      <button
+    <app-button
         *ngFor="let option of currentOptions; let i = index"
-        (click)="onClicked(i, option)"
-        class="text-lg py-2 px-4 rounded-lg buttonInQuestion cursor-pointer"
-        [ngClass]="selected == i ? 'ifTrue' : 'ifFalse'"
-      >
-        {{ option.text }}
-      </button>
+        [canDisplay]="true"
+        [buttonText]="option.text"
+        [buttonClass]="selected == i ? 'selected' : 'avoided'"
+        (clicked)="onClicked(i, option)"
+      ></app-button>
     </div>
-    <div *ngIf="currentQuestion.multiple_allowed" class="items-center">
+    <div *ngIf="currentQuestion.multipleAllowed" class="items-center">
       <mat-chip-list
         [formControl]="answersFormControl"
         appearance="fill"
@@ -58,17 +57,20 @@
       </mat-chip-list>
     </div>
   </div>
-
-  <div class="flex flex-row flex-wrap justify-end gap-5 lg:w-4/5 md:w-4/5">
-    <button
-      class="previousButton text-lg py-2 px-4 rounded-lg"
-      *ngIf="previous"
-      (click)="onPrev()"
-    >
-      Prev
-    </button>
-    <button class="nextButton text-lg py-2 px-4 rounded-lg" (click)="onNext()">
-      Next
-    </button>
+  <div class="flex flex-row flex-wrap justify-end lg:w-4/5 md:w-4/5">
+    <div class="flex flex-row flex-wrap gap-5">
+      <app-button
+        [canDisplay]="previous"
+        [buttonText]="'Prev'"
+        [buttonClass]="'previousButton'"
+        (clicked)="onPrev()"
+      ></app-button>
+      <app-button
+        [canDisplay]="true"
+        [buttonText]="'Next'"
+        [buttonClass]="'nextButton'"
+        (clicked)="onNext()"
+      ></app-button>
+    </div>
   </div>
 </div>
